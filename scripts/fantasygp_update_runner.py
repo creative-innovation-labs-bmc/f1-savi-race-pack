@@ -72,14 +72,18 @@ async def capture_site_page(page, *, league_id: str, race: int, offset: int) -> 
         if offset == 0:
             await page.evaluate(
                 """
-                ({race}) => {
+                ({leagueId, race}) => {
                   const select = window.jQuery('#raceselect2');
                   if (!select.length) throw new Error('FantasyGP race selector is missing');
+                  if (!select.find(`option[value="${race}"]`).length) {
+                    select.append(window.jQuery('<option>', {value: String(race), text: String(race)}));
+                  }
+                  select.attr('data-league', String(leagueId));
                   select.val(String(race));
                   select.trigger('change');
                 }
                 """,
-                {"race": race},
+                {"leagueId": league_id, "race": race},
             )
         else:
             await page.evaluate(
@@ -115,7 +119,7 @@ async def site_fetch_pages(
     expected_competitors: int,
 ) -> tuple[list[dict[str, Any]], tuple[FantasyGPRow, ...]]:
     await page.wait_for_function(
-        "() => window.jQuery && document.querySelectorAll('#raceselect2 option').length > 1",
+        "() => window.jQuery && document.querySelector('#raceselect2')",
         timeout=60_000,
     )
 
