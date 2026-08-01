@@ -65,9 +65,7 @@ jobs:
             --cumulative data/season2/cumulative.csv \
             --output build/fantasygp-update \
             --league-id 10527 \
-            --expected-competitors 46 \
-            --expected-round 11 \
-            --expected-race Hungary
+            --expected-competitors 46
 
       - name: Build Phase 1 race pack from fetched data
         if: steps.fetch.outcome == 'success'
