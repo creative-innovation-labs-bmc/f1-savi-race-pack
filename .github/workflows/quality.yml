@@ -17,19 +17,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
-      - name: Install package
-        run: python -m pip install --no-build-isolation -e .
+      - name: Compile source and tests
+        run: python -m compileall -q src tests
       - name: Run unit and reference tests
-        run: python -m unittest discover -s tests -v
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
       - name: Build Hungary reference pack
         run: |
-          python -m f1_savi build \
+          PYTHONPATH=src python -m f1_savi build \
             --individual tests/fixtures/F1_Season2_Individual_R11_Hungary.csv \
             --cumulative tests/fixtures/F1_Season2_Cumulative_R11_Hungary_GRAPH_FIXED.csv \
             --output build/round-11-hungary
       - name: Verify output manifest
-        run: python -m f1_savi verify --output build/round-11-hungary
+        run: PYTHONPATH=src python -m f1_savi verify --output build/round-11-hungary
       - name: Upload reference output
         uses: actions/upload-artifact@v4
         with:
