@@ -1,0 +1,147 @@
+name: FantasyGP race update
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Preview only, or apply validated CSVs to the season master
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - apply
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fantasygp-race-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FANTASYGP_USERNAME: ${{ secrets.FANTASYGP_USERNAME }}
+      FANTASYGP_PASSWORD: ${{ secrets.FANTASYGP_PASSWORD }}
+      PYTHONPATH: src
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Confirm encrypted secrets exist
+        shell: bash
+        run: |
+          if [[ -z "$FANTASYGP_USERNAME" || -z "$FANTASYGP_PASSWORD" ]]; then
+            echo "Required FantasyGP repository secrets are missing."
+            exit 1
+          fi
+
+      - name: Run deterministic tests
+        run: |
+          python -m compileall -q src scripts tests
+          python -m unittest discover -s tests -v
+
+      - name: Install Playwright
+        run: |
+          python -m pip install playwright==1.54.0
+          python -m playwright install --with-deps chromium
+
+      - name: Fetch and validate FantasyGP
+        run: |
+          python scripts/fantasygp_auth_runner.py \
+            --individual data/season2/individual.csv \
+            --cumulative data/season2/cumulative.csv \
+            --output build/fantasygp-update \
+            --league-id 10527 \
+            --expected-competitors 46
+
+      - name: Build complete race pack
+        run: |
+          python -m f1_savi build \
+            --individual build/fantasygp-update/updated_individual.csv \
+            --cumulative build/fantasygp-update/updated_cumulative.csv \
+            --output build/race-pack
+          python -m f1_savi verify --output build/race-pack
+
+      - name: Summarise validation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('build/fantasygp-update/update-summary.json').read_text(encoding='utf-8'))
+          update = summary.get('update', {})
+          print(f"Status: {update.get('status')}")
+          print(f"Round: {update.get('round')}")
+          print(f"Race: {update.get('race')}")
+          print(f"Competitors: {update.get('competitors')}")
+          print(f"Renamed teams: {len(update.get('renamed_teams', []))}")
+          PY
+
+      - name: Upload validated race pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: f1-savi-validated-race-pack
+          path: |
+            build/fantasygp-update/
+            build/race-pack/
+          retention-days: 14
+
+      - name: Apply updated season masters
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          UPDATE_STATUS=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('build/fantasygp-update/update-summary.json').read_text(encoding='utf-8'))
+          print(summary['update']['status'])
+          PY
+          )
+
+          if [[ "$UPDATE_STATUS" == "no_change" ]]; then
+            echo "FantasyGP matches the current season master. Nothing to commit."
+            exit 0
+          fi
+          if [[ "$UPDATE_STATUS" != "updated" ]]; then
+            echo "Unexpected update status: $UPDATE_STATUS"
+            exit 1
+          fi
+
+          cp build/fantasygp-update/updated_individual.csv data/season2/individual.csv
+          cp build/fantasygp-update/updated_cumulative.csv data/season2/cumulative.csv
+
+          git config user.name "F1 SAVI Race Pack"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/season2/individual.csv data/season2/cumulative.csv
+
+          if git diff --cached --quiet; then
+            echo "Validated files are unchanged. Nothing to commit."
+            exit 0
+          fi
+
+          ROUND=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('build/fantasygp-update/update-summary.json').read_text(encoding='utf-8'))
+          print(summary['update']['round'])
+          PY
+          )
+          RACE=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path('build/fantasygp-update/update-summary.json').read_text(encoding='utf-8'))
+          print(summary['update']['race'])
+          PY
+          )
+
+          git commit -m "Update F1 SAVI season data for Round ${ROUND} ${RACE}"
+          git push origin HEAD:main
