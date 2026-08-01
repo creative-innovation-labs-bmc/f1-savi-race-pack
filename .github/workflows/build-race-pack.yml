@@ -27,21 +27,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install package
-        run: python -m pip install --no-build-isolation -e .
       - name: Validate requested files
         run: |
           test -f "${{ inputs.individual_csv }}"
           test -f "${{ inputs.cumulative_csv }}"
       - name: Build race pack
         run: |
-          python -m f1_savi build \
+          PYTHONPATH=src python -m f1_savi build \
             --individual "${{ inputs.individual_csv }}" \
             --cumulative "${{ inputs.cumulative_csv }}" \
             --expected-competitors "${{ inputs.expected_competitors }}" \
             --output build/race-pack
       - name: Verify manifest
-        run: python -m f1_savi verify --output build/race-pack
+        run: PYTHONPATH=src python -m f1_savi verify --output build/race-pack
       - name: Upload race pack
         uses: actions/upload-artifact@v4
         with:
