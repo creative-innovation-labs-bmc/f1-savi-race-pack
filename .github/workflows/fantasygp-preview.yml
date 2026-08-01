@@ -5,10 +5,13 @@ on:
     branches: ["main"]
     paths:
       - "src/f1_savi/fantasygp.py"
+      - "src/f1_savi/labels.py"
       - "scripts/fantasygp_update.py"
       - "scripts/fantasygp_update_runner.py"
+      - "scripts/fantasygp_auth_runner.py"
       - "data/season2/**"
       - "tests/test_fantasygp.py"
+      - "tests/test_labels.py"
       - ".github/workflows/fantasygp-preview.yml"
       - ".github/workflows/fantasygp-update.yml"
 
@@ -57,7 +60,7 @@ jobs:
         id: fetch
         continue-on-error: true
         run: |
-          python scripts/fantasygp_update_runner.py \
+          python scripts/fantasygp_auth_runner.py \
             --individual data/season2/individual.csv \
             --cumulative data/season2/cumulative.csv \
             --output build/fantasygp-update \
