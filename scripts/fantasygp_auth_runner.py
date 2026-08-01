@@ -6,6 +6,22 @@ import fantasygp_update_runner as base
 from f1_savi.models import RacePackError
 
 
+async def wait_for_auth_state(page, timeout: int = 45_000) -> None:
+    await page.wait_for_function(
+        """
+        () => Boolean(
+          document.querySelector('#raceselect2') ||
+          document.querySelector('input[name="log"]') ||
+          document.querySelector('input#user_login') ||
+          document.querySelector('input[name="username"]') ||
+          document.querySelector('input[type="email"]') ||
+          document.querySelector('input[type="password"]')
+        )
+        """,
+        timeout=timeout,
+    )
+
+
 async def authenticated_login(page, *, league_url: str, username: str, password: str) -> dict[str, object]:
     last_error = "FantasyGP login was not accepted."
 
@@ -17,14 +33,16 @@ async def authenticated_login(page, *, league_url: str, username: str, password:
         await page.goto(league_url, wait_until="domcontentloaded", timeout=90_000)
 
         try:
-            await page.wait_for_function(
-                "() => window.MyAjax && window.MyAjax.ajaxurl && window.MyAjax.security && window.jQuery",
-                timeout=20_000,
-            )
+            await wait_for_auth_state(page)
         except Exception:
-            pass
+            last_error = f"FantasyGP did not finish loading its login or league interface on attempt {attempt}."
+            continue
 
         if await page.locator("#raceselect2").count():
+            await page.wait_for_function(
+                "() => window.MyAjax && window.MyAjax.ajaxurl && window.MyAjax.security && window.jQuery",
+                timeout=30_000,
+            )
             return {
                 "login_attempted": attempt > 1,
                 "login_attempts": attempt - 1,
@@ -51,7 +69,7 @@ async def authenticated_login(page, *, league_url: str, username: str, password:
             ],
         )
         if not username_selector or not password_selector:
-            last_error = "FantasyGP showed neither authenticated league controls nor a login form."
+            last_error = "FantasyGP loaded an unrecognised authentication interface."
             continue
 
         username_input = page.locator(username_selector).first
@@ -95,10 +113,11 @@ async def authenticated_login(page, *, league_url: str, username: str, password:
         await page.goto(league_url, wait_until="domcontentloaded", timeout=90_000)
 
         try:
-            await page.wait_for_selector("#raceselect2", state="attached", timeout=25_000)
+            await wait_for_auth_state(page)
+            await page.wait_for_selector("#raceselect2", state="attached", timeout=30_000)
             await page.wait_for_function(
                 "() => window.MyAjax && window.MyAjax.ajaxurl && window.MyAjax.security && window.jQuery",
-                timeout=25_000,
+                timeout=30_000,
             )
             return {
                 "login_attempted": True,
