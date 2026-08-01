@@ -1,0 +1,92 @@
+name: FantasyGP live preview
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "src/f1_savi/fantasygp.py"
+      - "scripts/fantasygp_update.py"
+      - "data/season2/**"
+      - "tests/test_fantasygp.py"
+      - ".github/workflows/fantasygp-preview.yml"
+      - ".github/workflows/fantasygp-update.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fantasygp-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      FANTASYGP_USERNAME: ${{ secrets.FANTASYGP_USERNAME }}
+      FANTASYGP_PASSWORD: ${{ secrets.FANTASYGP_PASSWORD }}
+      PYTHONPATH: src
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Confirm encrypted secrets exist
+        shell: bash
+        run: |
+          if [[ -z "$FANTASYGP_USERNAME" || -z "$FANTASYGP_PASSWORD" ]]; then
+            echo "Required FantasyGP repository secrets are missing."
+            exit 1
+          fi
+
+      - name: Compile and test Phase 2
+        run: |
+          python -m compileall -q src scripts tests
+          python -m unittest discover -s tests -v
+
+      - name: Install Playwright
+        run: |
+          python -m pip install playwright==1.54.0
+          python -m playwright install --with-deps chromium
+
+      - name: Fetch and validate current FantasyGP snapshot
+        id: fetch
+        continue-on-error: true
+        run: |
+          python scripts/fantasygp_update.py \
+            --individual data/season2/individual.csv \
+            --cumulative data/season2/cumulative.csv \
+            --output build/fantasygp-update \
+            --league-id 10527 \
+            --expected-competitors 46 \
+            --expected-round 11 \
+            --expected-race Hungary
+
+      - name: Build Phase 1 race pack from fetched data
+        if: steps.fetch.outcome == 'success'
+        run: |
+          python -m f1_savi build \
+            --individual build/fantasygp-update/updated_individual.csv \
+            --cumulative build/fantasygp-update/updated_cumulative.csv \
+            --output build/race-pack
+          python -m f1_savi verify --output build/race-pack
+
+      - name: Upload preview and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fantasygp-live-preview
+          path: |
+            build/fantasygp-update/
+            build/race-pack/
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Enforce live preview result
+        if: steps.fetch.outcome != 'success'
+        run: |
+          echo "FantasyGP live preview failed. The master CSVs were not changed."
+          exit 1
