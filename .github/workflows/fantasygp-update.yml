@@ -57,7 +57,7 @@ jobs:
 
       - name: Fetch and validate FantasyGP
         run: |
-          python scripts/fantasygp_update.py \
+          python scripts/fantasygp_update_runner.py \
             --individual data/season2/individual.csv \
             --cumulative data/season2/cumulative.csv \
             --output build/fantasygp-update \
