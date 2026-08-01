@@ -7,6 +7,7 @@ from urllib.parse import parse_qs
 import fantasygp_update as update
 from f1_savi.fantasygp import FantasyGPRow, combine_league_pages, parse_integer
 from f1_savi.models import RacePackError
+from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 
 def request_matches(response, *, race: int, offset: int) -> bool:
@@ -18,6 +19,62 @@ def request_matches(response, *, race: int, offset: int) -> bool:
         and parameters.get("leaguerace") == [str(race)]
         and parameters.get("leagueoffset") == [str(offset)]
     )
+
+
+async def reliable_login(page, *, league_url: str, username: str, password: str) -> dict[str, object]:
+    await page.goto(league_url, wait_until="domcontentloaded", timeout=90_000)
+
+    password_input = page.locator("input[type='password']:visible").first
+    login_attempted = await password_input.count() > 0
+    if login_attempted:
+        form = password_input.locator("xpath=ancestor::form[1]")
+        if not await form.count():
+            raise RacePackError("FantasyGP login fields are not inside a form.")
+
+        username_input = form.locator(
+            "input[name='log'], input#user_login, input[name='username'], input[type='email'], input[type='text']"
+        ).first
+        if not await username_input.count():
+            raise RacePackError("FantasyGP login form has no username field.")
+
+        await username_input.fill(username)
+        await password_input.fill(password)
+
+        remember = form.locator("input[name='rememberme'], input#rememberme")
+        if await remember.count() and await remember.first.is_visible():
+            try:
+                await remember.first.check()
+            except Exception:
+                pass
+
+        submit = form.locator(
+            "button[type='submit'], input[type='submit'], button:has-text('Log In'), button:has-text('Login')"
+        ).first
+        if not await submit.count():
+            raise RacePackError("FantasyGP login form has no submit control.")
+
+        try:
+            async with page.expect_navigation(wait_until="domcontentloaded", timeout=30_000):
+                await submit.click()
+        except PlaywrightTimeoutError:
+            await page.wait_for_timeout(3_000)
+
+        await page.goto(league_url, wait_until="domcontentloaded", timeout=90_000)
+
+    try:
+        await page.wait_for_selector("#raceselect2", state="attached", timeout=60_000)
+        await page.wait_for_function(
+            "() => window.MyAjax && window.MyAjax.ajaxurl && window.MyAjax.security && window.jQuery",
+            timeout=60_000,
+        )
+    except Exception as error:
+        body = (await page.locator("body").inner_text()).casefold()
+        password_still_visible = await page.locator("input[type='password']:visible").count() > 0
+        if password_still_visible or "please login to continue" in body:
+            raise RacePackError("FantasyGP login was not accepted.") from error
+        raise RacePackError("FantasyGP authenticated league controls did not load.") from error
+
+    return {"login_attempted": login_attempted, "final_url": page.url, "authenticated": True}
 
 
 async def jquery_ajax(
@@ -118,11 +175,6 @@ async def site_fetch_pages(
     race: int,
     expected_competitors: int,
 ) -> tuple[list[dict[str, Any]], tuple[FantasyGPRow, ...]]:
-    await page.wait_for_function(
-        "() => window.jQuery && document.querySelector('#raceselect2')",
-        timeout=60_000,
-    )
-
     pages: list[dict[str, Any]] = []
     offset = 0
     seen_offsets: set[int] = set()
@@ -172,6 +224,7 @@ async def site_fetch_pages(
     return pages, rows
 
 
+update.login = reliable_login
 update.ajax = jquery_ajax
 update.fetch_pages = site_fetch_pages
 
