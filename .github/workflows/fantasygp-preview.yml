@@ -6,6 +6,7 @@ on:
     paths:
       - "src/f1_savi/fantasygp.py"
       - "scripts/fantasygp_update.py"
+      - "scripts/fantasygp_update_runner.py"
       - "data/season2/**"
       - "tests/test_fantasygp.py"
       - ".github/workflows/fantasygp-preview.yml"
@@ -56,7 +57,7 @@ jobs:
         id: fetch
         continue-on-error: true
         run: |
-          python scripts/fantasygp_update.py \
+          python scripts/fantasygp_update_runner.py \
             --individual data/season2/individual.csv \
             --cumulative data/season2/cumulative.csv \
             --output build/fantasygp-update \
