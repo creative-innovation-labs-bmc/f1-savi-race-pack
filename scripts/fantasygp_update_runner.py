@@ -7,7 +7,6 @@ from urllib.parse import parse_qs
 import fantasygp_update as update
 from f1_savi.fantasygp import FantasyGPRow, combine_league_pages, parse_integer
 from f1_savi.models import RacePackError
-from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 
 def request_matches(response, *, race: int, offset: int) -> bool:
@@ -24,40 +23,47 @@ def request_matches(response, *, race: int, offset: int) -> bool:
 async def reliable_login(page, *, league_url: str, username: str, password: str) -> dict[str, object]:
     await page.goto(league_url, wait_until="domcontentloaded", timeout=90_000)
 
-    password_input = page.locator("input[type='password']:visible").first
-    login_attempted = await password_input.count() > 0
+    username_selector = await update.first_visible(
+        page,
+        ["input[name='log']", "input#user_login", "input[name='username']", "input[type='email']"],
+    )
+    password_selector = await update.first_visible(
+        page,
+        ["input[name='pwd']", "input#user_pass", "input[name='password']", "input[type='password']"],
+    )
+    login_attempted = bool(username_selector and password_selector)
+
     if login_attempted:
-        form = password_input.locator("xpath=ancestor::form[1]")
-        if not await form.count():
-            raise RacePackError("FantasyGP login fields are not inside a form.")
-
-        username_input = form.locator(
-            "input[name='log'], input#user_login, input[name='username'], input[type='email'], input[type='text']"
-        ).first
-        if not await username_input.count():
-            raise RacePackError("FantasyGP login form has no username field.")
-
+        assert username_selector and password_selector
+        username_input = page.locator(username_selector).first
+        password_input = page.locator(password_selector).first
         await username_input.fill(username)
         await password_input.fill(password)
 
-        remember = form.locator("input[name='rememberme'], input#rememberme")
+        remember = page.locator("input[name='rememberme'], input#rememberme")
         if await remember.count() and await remember.first.is_visible():
             try:
                 await remember.first.check()
             except Exception:
                 pass
 
-        submit = form.locator(
-            "button[type='submit'], input[type='submit'], button:has-text('Log In'), button:has-text('Login')"
-        ).first
-        if not await submit.count():
-            raise RacePackError("FantasyGP login form has no submit control.")
+        await password_input.press("Enter")
+        await page.wait_for_timeout(8_000)
 
-        try:
-            async with page.expect_navigation(wait_until="domcontentloaded", timeout=30_000):
-                await submit.click()
-        except PlaywrightTimeoutError:
-            await page.wait_for_timeout(3_000)
+        if await page.locator("input[type='password']:visible").count():
+            submit_selector = await update.first_visible(
+                page,
+                [
+                    "input[type='submit'][value='Log In']",
+                    "button:has-text('Log In')",
+                    "input[type='submit']",
+                    "button[type='submit']",
+                ],
+            )
+            if not submit_selector:
+                raise RacePackError("FantasyGP login form has no visible Log In control.")
+            await page.locator(submit_selector).first.click()
+            await page.wait_for_timeout(8_000)
 
         await page.goto(league_url, wait_until="domcontentloaded", timeout=90_000)
 
