@@ -161,7 +161,7 @@ async def site_fetch_pages(
               String(element.dataset.offset) === String(offset)
             )
             """,
-            {"leagueId": league_id, "race": race, "offset": next_offset},
+            arg={"leagueId": league_id, "race": race, "offset": next_offset},
             timeout=30_000,
         )
         offset = next_offset
