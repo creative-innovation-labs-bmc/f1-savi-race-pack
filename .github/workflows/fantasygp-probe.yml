@@ -6,11 +6,13 @@ on:
     branches: ["build/phase-2"]
     paths:
       - "scripts/fantasygp_probe.py"
+      - "scripts/fantasygp_probe_runner.py"
       - ".github/workflows/fantasygp-probe.yml"
   pull_request:
     branches: ["main"]
     paths:
       - "scripts/fantasygp_probe.py"
+      - "scripts/fantasygp_probe_runner.py"
       - ".github/workflows/fantasygp-probe.yml"
 
 permissions:
@@ -49,7 +51,7 @@ jobs:
       - name: Probe authenticated league page
         id: probe
         continue-on-error: true
-        run: python scripts/fantasygp_probe.py
+        run: python scripts/fantasygp_probe_runner.py
 
       - name: Upload sanitised diagnostics
         if: always()
