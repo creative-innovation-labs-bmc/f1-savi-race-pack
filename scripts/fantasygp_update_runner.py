@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import asyncio
+from dataclasses import replace
 from typing import Any
 from urllib.parse import parse_qs
 
 import fantasygp_update as update
 from f1_savi.fantasygp import FantasyGPRow, combine_league_pages, parse_integer
+from f1_savi.labels import normalise_display_label
 from f1_savi.models import RacePackError
 
 
@@ -227,7 +229,15 @@ async def site_fetch_pages(
             raise RacePackError("FantasyGP pagination exceeded 20 pages.")
 
     rows = combine_league_pages(pages, expected_competitors=expected_competitors)
-    return pages, rows
+    clean_rows = tuple(
+        replace(
+            row,
+            team=normalise_display_label(row.team),
+            manager=normalise_display_label(row.manager),
+        )
+        for row in rows
+    )
+    return pages, clean_rows
 
 
 update.login = reliable_login
