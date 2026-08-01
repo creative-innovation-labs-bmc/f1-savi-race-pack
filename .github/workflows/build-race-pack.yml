@@ -1,0 +1,47 @@
+name: Build race pack
+
+on:
+  workflow_dispatch:
+    inputs:
+      individual_csv:
+        description: Repository path to the individual race CSV
+        required: true
+        default: tests/fixtures/F1_Season2_Individual_R11_Hungary.csv
+      cumulative_csv:
+        description: Repository path to the authoritative cumulative CSV
+        required: true
+        default: tests/fixtures/F1_Season2_Cumulative_R11_Hungary_GRAPH_FIXED.csv
+      expected_competitors:
+        description: Expected number of league competitors
+        required: true
+        default: "46"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate requested files
+        run: |
+          test -f "${{ inputs.individual_csv }}"
+          test -f "${{ inputs.cumulative_csv }}"
+      - name: Build race pack
+        run: |
+          PYTHONPATH=src python -m f1_savi build \
+            --individual "${{ inputs.individual_csv }}" \
+            --cumulative "${{ inputs.cumulative_csv }}" \
+            --expected-competitors "${{ inputs.expected_competitors }}" \
+            --output build/race-pack
+      - name: Verify manifest
+        run: PYTHONPATH=src python -m f1_savi verify --output build/race-pack
+      - name: Upload race pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: f1-savi-race-pack
+          path: build/race-pack/
