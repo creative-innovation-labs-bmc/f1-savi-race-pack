@@ -15,20 +15,41 @@ This project treats:
 
 Every mismatch is recorded as an adjustment instead of silently changing the data.
 
-## Quick start
+## Easiest way to run it
 
-Requires Python 3.11 or newer.
+1. Add the latest individual and cumulative CSVs to the repository.
+2. Open **Actions** in GitHub.
+3. Select **Build race pack**.
+4. Choose **Run workflow** and enter the two repository file paths.
+5. Download the `f1-savi-race-pack` artifact when the run finishes.
+6. Open `Teams_Update.html` and use **Copy complete Teams update**.
 
-```bash
-python -m pip install --no-build-isolation -e .
-python -m f1_savi build \
-  --individual tests/fixtures/F1_Season2_Individual_R11_Hungary.csv \
-  --cumulative tests/fixtures/F1_Season2_Cumulative_R11_Hungary_GRAPH_FIXED.csv \
+The workflow refuses to produce an artifact when validation fails.
+
+## Run locally
+
+Requires Python 3.11 or newer. The application itself has no third-party runtime dependencies.
+
+### Windows PowerShell
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m f1_savi build `
+  --individual tests/fixtures/F1_Season2_Individual_R11_Hungary.csv `
+  --cumulative tests/fixtures/F1_Season2_Cumulative_R11_Hungary_GRAPH_FIXED.csv `
   --output build/round-11-hungary
 python -m f1_savi verify --output build/round-11-hungary
 ```
 
-Open `build/round-11-hungary/Teams_Update.html`, then use **Copy complete Teams update**.
+### macOS or Linux
+
+```bash
+PYTHONPATH=src python -m f1_savi build \
+  --individual tests/fixtures/F1_Season2_Individual_R11_Hungary.csv \
+  --cumulative tests/fixtures/F1_Season2_Cumulative_R11_Hungary_GRAPH_FIXED.csv \
+  --output build/round-11-hungary
+PYTHONPATH=src python -m f1_savi verify --output build/round-11-hungary
+```
 
 ## Output package
 
@@ -44,13 +65,24 @@ Open `build/round-11-hungary/Teams_Update.html`, then use **Copy complete Teams 
 
 ## Quality control
 
-```bash
+Windows PowerShell:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m compileall -q src tests
 python -m unittest discover -s tests -v
+```
+
+macOS or Linux:
+
+```bash
+python -m compileall -q src tests
+PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
 The test suite locks the Hungary Round 11 rankings, tie behaviour, podium changes, movement calculations, known FantasyGP corrections and output hashes.
 
-GitHub Actions runs the same tests on every pull request and builds the Hungary reference pack as an artifact.
+GitHub Actions runs the same checks on every pull request and builds the Hungary reference pack as an artifact.
 
 ## Current Flourish projects
 
