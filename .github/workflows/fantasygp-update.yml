@@ -11,6 +11,12 @@ on:
         options:
           - preview
           - apply
+  schedule:
+    # Monday morning and afternoon in Melbourne, with a Tuesday fallback.
+    # UTC is used because GitHub Actions cron schedules do not follow daylight saving.
+    - cron: "0 22 * * 0"
+    - cron: "0 4 * * 1"
+    - cron: "0 0 * * 2"
 
 permissions:
   contents: write
@@ -96,7 +102,7 @@ jobs:
           retention-days: 14
 
       - name: Apply updated season masters
-        if: inputs.mode == 'apply'
+        if: github.event_name == 'schedule' || inputs.mode == 'apply'
         shell: bash
         run: |
           UPDATE_STATUS=$(python - <<'PY'
