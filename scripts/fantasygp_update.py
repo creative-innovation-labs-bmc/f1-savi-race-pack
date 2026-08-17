@@ -68,6 +68,57 @@ async def first_visible(page: Page, selectors: list[str]) -> str | None:
     return None
 
 
+async def write_auth_diagnostics(page: Page, diagnostics: Path, error: Exception) -> None:
+    diagnostics.mkdir(parents=True, exist_ok=True)
+    try:
+        await page.screenshot(path=str(diagnostics / "auth-failure.png"), full_page=True)
+    except Exception:
+        pass
+
+    try:
+        details = await page.evaluate(
+            """
+            () => {
+              const visible = element => {
+                const style = window.getComputedStyle(element);
+                const rect = element.getBoundingClientRect();
+                return style.visibility !== 'hidden' &&
+                  style.display !== 'none' &&
+                  rect.width > 0 &&
+                  rect.height > 0;
+              };
+              return {
+                title: document.title,
+                visibleInputs: [...document.querySelectorAll('input')]
+                  .filter(visible)
+                  .map(element => ({
+                    type: element.type || '',
+                    name: element.name || '',
+                    id: element.id || '',
+                    autocomplete: element.autocomplete || ''
+                  })),
+                visibleButtons: [...document.querySelectorAll('button, input[type="submit"]')]
+                  .filter(visible)
+                  .map(element => (element.innerText || element.value || '').trim())
+                  .filter(Boolean),
+                bodyExcerpt: (document.body?.innerText || '').slice(0, 1500)
+              };
+            }
+            """
+        )
+    except Exception as diagnostic_error:
+        details = {"diagnostic_error": f"{type(diagnostic_error).__name__}: {diagnostic_error}"}
+
+    payload = {
+        "error": f"{type(error).__name__}: {error}",
+        "url": page.url,
+        **details,
+    }
+    (diagnostics / "auth-failure.json").write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+
+
 async def login(page: Page, *, league_url: str, username: str, password: str) -> dict[str, object]:
     await page.goto(league_url, wait_until="domcontentloaded", timeout=90_000)
     username_selector = await first_visible(
@@ -222,9 +273,16 @@ async def run(args: argparse.Namespace) -> dict[str, object]:
             viewport={"width": 1440, "height": 1400},
         )
         page = await context.new_page()
-        login_summary = await login(
-            page, league_url=args.league_url, username=username, password=password
-        )
+        try:
+            login_summary = await login(
+                page, league_url=args.league_url, username=username, password=password
+            )
+        except Exception as error:
+            await write_auth_diagnostics(page, diagnostics, error)
+            await context.close()
+            await browser.close()
+            raise
+
         try:
             await page.wait_for_load_state("networkidle", timeout=45_000)
         except Exception:
