@@ -11,6 +11,9 @@ on:
         options:
           - preview
           - apply
+  push:
+    branches:
+      - main
   schedule:
     # Monday morning and afternoon in Melbourne, with a Tuesday fallback.
     # UTC is used because GitHub Actions cron schedules do not follow daylight saving.
