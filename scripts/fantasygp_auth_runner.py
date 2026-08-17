@@ -9,14 +9,42 @@ from f1_savi.models import RacePackError
 async def wait_for_auth_state(page, timeout: int = 45_000) -> None:
     await page.wait_for_function(
         """
-        () => Boolean(
-          document.querySelector('#raceselect2') ||
-          document.querySelector('input[name="log"]') ||
-          document.querySelector('input#user_login') ||
-          document.querySelector('input[name="username"]') ||
-          document.querySelector('input[type="email"]') ||
-          document.querySelector('input[type="password"]')
-        )
+        () => {
+          const visible = element => {
+            if (!element) return false;
+            const style = window.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            return style.visibility !== 'hidden' &&
+              style.display !== 'none' &&
+              rect.width > 0 &&
+              rect.height > 0;
+          };
+
+          const league = document.querySelector('#raceselect2');
+          if (visible(league)) return true;
+
+          const usernameSelectors = [
+            'input[name="log"]',
+            'input#user_login',
+            'input[name="username"]',
+            'input[type="email"]'
+          ];
+          const passwordSelectors = [
+            'input[name="pwd"]',
+            'input#user_pass',
+            'input[name="password"]',
+            'input[type="password"]'
+          ];
+
+          const usernameReady = usernameSelectors.some(selector =>
+            [...document.querySelectorAll(selector)].some(visible)
+          );
+          const passwordReady = passwordSelectors.some(selector =>
+            [...document.querySelectorAll(selector)].some(visible)
+          );
+
+          return usernameReady && passwordReady;
+        }
         """,
         timeout=timeout,
     )
@@ -38,7 +66,8 @@ async def authenticated_login(page, *, league_url: str, username: str, password:
             last_error = f"FantasyGP did not finish loading its login or league interface on attempt {attempt}."
             continue
 
-        if await page.locator("#raceselect2").count():
+        race_select = page.locator("#raceselect2").first
+        if await race_select.count() and await race_select.is_visible():
             await page.wait_for_function(
                 "() => window.MyAjax && window.MyAjax.ajaxurl && window.MyAjax.security && window.jQuery",
                 timeout=30_000,
@@ -99,6 +128,7 @@ async def authenticated_login(page, *, league_url: str, username: str, password:
                 page,
                 [
                     "button:has-text('Log In')",
+                    "button:has-text('Login')",
                     "input[type='submit'][value='Log In']",
                     "button[type='submit']",
                     "input[type='submit']",
@@ -114,7 +144,9 @@ async def authenticated_login(page, *, league_url: str, username: str, password:
 
         try:
             await wait_for_auth_state(page)
-            await page.wait_for_selector("#raceselect2", state="attached", timeout=30_000)
+            race_select = page.locator("#raceselect2").first
+            if not await race_select.count() or not await race_select.is_visible():
+                raise RacePackError("FantasyGP login did not expose the authenticated league interface.")
             await page.wait_for_function(
                 "() => window.MyAjax && window.MyAjax.ajaxurl && window.MyAjax.security && window.jQuery",
                 timeout=30_000,
