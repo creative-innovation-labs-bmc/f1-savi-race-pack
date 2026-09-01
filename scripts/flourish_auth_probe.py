@@ -11,6 +11,7 @@ from playwright.async_api import async_playwright
 
 OUTPUT = Path("build/flourish-republish/diagnostics/auth-probe.json")
 LOGIN_URL = "https://app.flourish.studio/login"
+EDITOR_URL = "https://app.flourish.studio/visualisation/23536150/edit"
 
 
 def safe_url(url: str) -> str:
@@ -35,12 +36,15 @@ async def run() -> int:
         def on_response(response) -> None:
             try:
                 request = response.request
-                if request.method != "GET" and "flourish.studio" in response.url:
+                url = safe_url(response.url)
+                if "app.flourish.studio" in response.url and (
+                    request.method != "GET" or "/visualisation/" in url or url.endswith("/login")
+                ):
                     events.append(
                         {
                             "kind": "response",
                             "method": request.method,
-                            "url": safe_url(response.url),
+                            "url": url,
                             "status": response.status,
                         }
                     )
@@ -68,7 +72,35 @@ async def run() -> int:
                 events.append(
                     {
                         "kind": "state",
-                        "ms_after_submit": (tick + 1) * 500,
+                        "phase": "after_login",
+                        "ms": (tick + 1) * 500,
+                        "url": state[0],
+                        "password_visible": state[1],
+                    }
+                )
+                previous = state
+
+        projects_body = (await page.locator("body").inner_text()).casefold()
+        events.append(
+            {
+                "kind": "projects_check",
+                "url": safe_url(page.url),
+                "has_races_project_name": "f1 savi league - races" in projects_body,
+                "has_leaderboard_project_name": "f1 savi league - leaderboard" in projects_body,
+            }
+        )
+
+        await page.goto(EDITOR_URL, wait_until="domcontentloaded", timeout=90_000)
+        previous = None
+        for tick in range(30):
+            await page.wait_for_timeout(500)
+            state = (safe_url(page.url), bool(await page.locator("input[type='password']:visible").count()))
+            if state != previous:
+                events.append(
+                    {
+                        "kind": "state",
+                        "phase": "editor_navigation",
+                        "ms": (tick + 1) * 500,
                         "url": state[0],
                         "password_visible": state[1],
                     }
