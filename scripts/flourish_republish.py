@@ -63,7 +63,17 @@ async def capture(page: Page, directory: Path, label: str) -> None:
         pass
 
 
-async def login_if_needed(page: Page, *, email: str, password: str, diagnostics: Path) -> None:
+async def login_if_needed(page: Page, *, email: str, password: str, diagnostics: Path) -> bool:
+    # Flourish can redirect from an editor URL to /login after the first DOM load.
+    # If we are on the login route, give the client-rendered form time to appear.
+    if "/login" in page.url:
+        try:
+            await page.locator("input[type='email'], input[name='email']").first.wait_for(
+                state="visible", timeout=15_000
+            )
+        except Exception:
+            pass
+
     email_selector = await first_visible(
         page,
         [
@@ -83,7 +93,7 @@ async def login_if_needed(page: Page, *, email: str, password: str, diagnostics:
     )
 
     if not email_selector and not password_selector:
-        return
+        return False
     if not email_selector or not password_selector:
         await capture(page, diagnostics, "incomplete-login-form")
         raise RuntimeError("Flourish presented an unrecognised login form.")
@@ -107,20 +117,59 @@ async def login_if_needed(page: Page, *, email: str, password: str, diagnostics:
         raise RuntimeError("Flourish login form has no usable submit control.")
 
     await page.locator(submit).first.click()
-    try:
-        await page.wait_for_load_state("networkidle", timeout=45_000)
-    except Exception:
-        await page.wait_for_timeout(8_000)
 
-    body = (await page.locator("body").inner_text()).casefold()
-    if any(term in body for term in ("verification code", "two-factor", "two factor", "authenticator")):
-        await capture(page, diagnostics, "mfa-required")
-        raise RuntimeError(
-            "Flourish requires an interactive MFA step; browser republishing cannot continue unattended."
+    # Wait for either a successful route change or a stable login failure/MFA state.
+    for _ in range(45):
+        await page.wait_for_timeout(1_000)
+        body = (await page.locator("body").inner_text()).casefold()
+        if any(term in body for term in ("verification code", "two-factor", "two factor", "authenticator")):
+            await capture(page, diagnostics, "mfa-required")
+            raise RuntimeError(
+                "Flourish requires an interactive MFA step; browser republishing cannot continue unattended."
+            )
+        if "/login" not in page.url and not await page.locator("input[type='password']:visible").count():
+            return True
+
+    await capture(page, diagnostics, "login-not-accepted")
+    raise RuntimeError("Flourish did not leave the login screen after submitting the configured credentials.")
+
+
+async def ensure_editor_access(
+    page: Page,
+    *,
+    visualisation_id: int,
+    email: str,
+    password: str,
+    diagnostics: Path,
+) -> None:
+    edit_url = f"https://app.flourish.studio/visualisation/{visualisation_id}/edit"
+
+    for attempt in range(3):
+        await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
+        # Allow Flourish's client-side auth redirect to settle before deciding whether
+        # a login form is present.
+        await page.wait_for_timeout(2_500)
+
+        logged_in = await login_if_needed(
+            page, email=email, password=password, diagnostics=diagnostics
         )
-    if await page.locator("input[type='password']:visible").count():
-        await capture(page, diagnostics, "login-not-accepted")
-        raise RuntimeError("Flourish did not accept the configured login credentials.")
+        if logged_in:
+            await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
+            await page.wait_for_timeout(2_500)
+
+        if f"/visualisation/{visualisation_id}/edit" in page.url:
+            # A late auth redirect can still happen after the URL initially looks right.
+            await page.wait_for_timeout(2_000)
+            if "/login" not in page.url:
+                return
+
+        if attempt < 2:
+            await page.wait_for_timeout(1_500)
+
+    await capture(page, diagnostics, f"{visualisation_id}-editor-access-failed")
+    raise RuntimeError(
+        f"Could not establish authenticated editor access for Flourish visualisation {visualisation_id}."
+    )
 
 
 async def open_publish_panel(page: Page, diagnostics: Path, visualisation_id: int) -> None:
@@ -158,12 +207,13 @@ async def click_exact_republish(page: Page) -> bool:
 
 
 async def republish(page: Page, *, visualisation_id: int, email: str, password: str, diagnostics: Path) -> None:
-    edit_url = f"https://app.flourish.studio/visualisation/{visualisation_id}/edit"
-    await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
-    await login_if_needed(page, email=email, password=password, diagnostics=diagnostics)
-
-    if f"/visualisation/{visualisation_id}/edit" not in page.url:
-        await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
+    await ensure_editor_access(
+        page,
+        visualisation_id=visualisation_id,
+        email=email,
+        password=password,
+        diagnostics=diagnostics,
+    )
 
     try:
         await page.wait_for_load_state("networkidle", timeout=45_000)
