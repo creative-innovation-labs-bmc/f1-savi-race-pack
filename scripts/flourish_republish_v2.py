@@ -15,7 +15,6 @@ PROJECTS = {
     23537908: "F1 SAVI League - Leaderboard",
 }
 LOGIN_URL = "https://app.flourish.studio/login"
-PROJECTS_URL = "https://app.flourish.studio/projects"
 
 
 def parser() -> argparse.ArgumentParser:
@@ -70,9 +69,8 @@ async def login(page: Page, email: str, password: str, diagnostics: Path) -> Non
     await submit.click()
 
     await page.wait_for_url(re.compile(r"/projects(?:$|[?#])"), timeout=45_000)
-    # Do not immediately leave /projects. Flourish performs additional client-side
-    # session setup after the initial 302. Wait until the known projects themselves
-    # are visible before opening an editor.
+    # Flourish completes more client-side session setup after the initial redirect.
+    # Wait until the known projects themselves are visible before opening an editor.
     await page.get_by_text(PROJECTS[23536150], exact=True).wait_for(state="visible", timeout=45_000)
     await page.get_by_text(PROJECTS[23537908], exact=True).wait_for(state="visible", timeout=45_000)
     await page.wait_for_timeout(5_000)
@@ -93,18 +91,47 @@ async def exact_control(page: Page, names: list[str]):
     return None
 
 
+async def unpublished_changes_button(page: Page):
+    """Return the icon button tied specifically to Flourish's Unpublished changes row."""
+    status = page.get_by_text("Unpublished changes", exact=True)
+    try:
+        if not await status.count() or not await status.first.is_visible():
+            return None
+        # Current Flourish UI renders the status text and circular-arrow publish
+        # button as siblings in the same row. Anchor to the exact status text so we
+        # never click a generic icon elsewhere in the export menu.
+        row = status.first.locator("xpath=ancestor::*[.//button][1]")
+        buttons = row.locator("button:visible")
+        if await buttons.count() == 1:
+            return buttons.first
+    except Exception:
+        pass
+    return None
+
+
+async def wait_until_published(page: Page, visualisation_id: int, diagnostics: Path) -> None:
+    for _ in range(40):
+        await page.wait_for_timeout(500)
+        status = page.get_by_text("Unpublished changes", exact=True)
+        try:
+            if not await status.count() or not await status.first.is_visible():
+                return
+        except Exception:
+            return
+    await snapshot(page, diagnostics, f"{visualisation_id}-publish-status-did-not-clear")
+    raise RuntimeError(f"Flourish still reports unpublished changes for {visualisation_id}.")
+
+
 async def republish_one(page: Page, visualisation_id: int, diagnostics: Path) -> None:
     expected_name = PROJECTS[visualisation_id]
     edit_url = f"https://app.flourish.studio/visualisation/{visualisation_id}/edit"
     await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
 
-    # Wait for the editor title and then give its toolbar a little time to hydrate.
     for _ in range(60):
         if "/login" in page.url:
             await snapshot(page, diagnostics, f"{visualisation_id}-unexpected-login")
             raise RuntimeError(f"Flourish session was lost while opening {visualisation_id}.")
-        title = await page.title()
-        if expected_name in title:
+        if expected_name in await page.title():
             break
         await page.wait_for_timeout(500)
     else:
@@ -114,37 +141,47 @@ async def republish_one(page: Page, visualisation_id: int, diagnostics: Path) ->
     await page.wait_for_timeout(8_000)
     await snapshot(page, diagnostics, f"{visualisation_id}-before-republish")
 
-    # Flourish may expose Republish directly when there are unpublished changes.
+    # Older/current variants may expose a text-labelled Republish control directly.
     control = await exact_control(page, ["Republish", "Publish changes"])
-    if control is None:
+    if control is not None:
+        await control.click()
+        await page.wait_for_timeout(2_000)
+    else:
         export_control = await exact_control(page, ["Export & publish", "Export and publish"])
         if export_control is None:
             await snapshot(page, diagnostics, f"{visualisation_id}-no-export-control")
             raise RuntimeError(f"No Export & publish control was visible for {visualisation_id}.")
         await export_control.click()
         await page.wait_for_timeout(2_000)
+
+        # 2026 Flourish free-account UI shows an 'Unpublished changes' status row
+        # with a circular-arrow icon button rather than a text-labelled Republish.
         control = await exact_control(page, ["Republish", "Publish changes"])
+        if control is not None:
+            await control.click()
+        else:
+            icon_button = await unpublished_changes_button(page)
+            if icon_button is None:
+                await snapshot(page, diagnostics, f"{visualisation_id}-no-republish-control")
+                raise RuntimeError(
+                    f"No safe Republish control was found for Flourish visualisation {visualisation_id}."
+                )
+            await icon_button.click()
 
-    if control is None:
-        await snapshot(page, diagnostics, f"{visualisation_id}-no-republish-control")
-        raise RuntimeError(
-            f"No exact Republish/Publish changes control was visible for {visualisation_id}."
-        )
+    await page.wait_for_timeout(2_000)
 
-    await control.click()
-    await page.wait_for_timeout(5_000)
-
-    # A confirmation dialog may appear. Only accept an exact republish-labelled
-    # confirmation, never a broad or ambiguous publish button.
+    # A confirmation dialog may appear in some UI variants.
     confirmation = await exact_control(page, ["Republish", "Publish changes"])
     if confirmation is not None:
         try:
             await confirmation.click()
-            await page.wait_for_timeout(5_000)
         except Exception:
             pass
 
+    await wait_until_published(page, visualisation_id, diagnostics)
+    await page.wait_for_timeout(3_000)
     await snapshot(page, diagnostics, f"{visualisation_id}-after-republish")
+
     if "/login" in page.url:
         raise RuntimeError(f"Flourish session was lost while republishing {visualisation_id}.")
 
