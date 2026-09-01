@@ -1,1 +1,1 @@
-Netherlands - Race 12 | republish retry after explicit Flourish login | 2026-09-01 Australia/Melbourne
+Netherlands - Race 12 | republish retry with stable auth verification | 2026-09-01 Australia/Melbourne
