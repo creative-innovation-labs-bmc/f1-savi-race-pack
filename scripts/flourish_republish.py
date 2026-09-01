@@ -11,6 +11,7 @@ from playwright.async_api import Page, async_playwright
 
 
 DEFAULT_VISUALISATIONS = (23536150, 23537908)
+LOGIN_URL = "https://app.flourish.studio/login"
 
 
 def parser() -> argparse.ArgumentParser:
@@ -63,17 +64,7 @@ async def capture(page: Page, directory: Path, label: str) -> None:
         pass
 
 
-async def login_if_needed(page: Page, *, email: str, password: str, diagnostics: Path) -> bool:
-    # Flourish can redirect from an editor URL to /login after the first DOM load.
-    # If we are on the login route, give the client-rendered form time to appear.
-    if "/login" in page.url:
-        try:
-            await page.locator("input[type='email'], input[name='email']").first.wait_for(
-                state="visible", timeout=15_000
-            )
-        except Exception:
-            pass
-
+async def visible_login_fields(page: Page) -> tuple[str | None, str | None]:
     email_selector = await first_visible(
         page,
         [
@@ -91,12 +82,25 @@ async def login_if_needed(page: Page, *, email: str, password: str, diagnostics:
             "input[autocomplete='current-password']",
         ],
     )
+    return email_selector, password_selector
 
-    if not email_selector and not password_selector:
-        return False
-    if not email_selector or not password_selector:
-        await capture(page, diagnostics, "incomplete-login-form")
-        raise RuntimeError("Flourish presented an unrecognised login form.")
+
+async def login(page: Page, *, email: str, password: str, diagnostics: Path) -> None:
+    await page.goto(LOGIN_URL, wait_until="domcontentloaded", timeout=90_000)
+
+    # The Flourish login form is client-rendered. Wait explicitly for the email and
+    # password controls instead of depending on an editor redirect settling in time.
+    for _ in range(30):
+        email_selector, password_selector = await visible_login_fields(page)
+        if email_selector and password_selector:
+            break
+        if "/login" not in page.url:
+            # An existing authenticated session may redirect away from /login.
+            return
+        await page.wait_for_timeout(1_000)
+    else:
+        await capture(page, diagnostics, "login-form-timeout")
+        raise RuntimeError("Flourish login form did not become usable before timeout.")
 
     await page.locator(email_selector).first.fill(email)
     await page.locator(password_selector).first.fill(password)
@@ -118,7 +122,6 @@ async def login_if_needed(page: Page, *, email: str, password: str, diagnostics:
 
     await page.locator(submit).first.click()
 
-    # Wait for either a successful route change or a stable login failure/MFA state.
     for _ in range(45):
         await page.wait_for_timeout(1_000)
         body = (await page.locator("body").inner_text()).casefold()
@@ -127,11 +130,40 @@ async def login_if_needed(page: Page, *, email: str, password: str, diagnostics:
             raise RuntimeError(
                 "Flourish requires an interactive MFA step; browser republishing cannot continue unattended."
             )
+        if any(
+            term in body
+            for term in (
+                "invalid email",
+                "invalid password",
+                "incorrect password",
+                "email or password is incorrect",
+                "couldn't log in",
+                "could not log in",
+            )
+        ):
+            await capture(page, diagnostics, "login-rejected")
+            raise RuntimeError("Flourish rejected the configured email/password login.")
         if "/login" not in page.url and not await page.locator("input[type='password']:visible").count():
-            return True
+            return
 
     await capture(page, diagnostics, "login-not-accepted")
     raise RuntimeError("Flourish did not leave the login screen after submitting the configured credentials.")
+
+
+async def wait_for_editor_or_login(page: Page, *, visualisation_id: int, timeout_seconds: int = 45) -> str:
+    publish_candidates = [
+        "button:has-text('Export & publish')",
+        "button:has-text('Export and publish')",
+        "[role='button']:has-text('Export & publish')",
+        "[role='button']:has-text('Export and publish')",
+    ]
+    for _ in range(timeout_seconds):
+        if "/login" in page.url:
+            return "login"
+        if await first_visible(page, publish_candidates):
+            return "editor"
+        await page.wait_for_timeout(1_000)
+    return "timeout"
 
 
 async def ensure_editor_access(
@@ -144,27 +176,15 @@ async def ensure_editor_access(
 ) -> None:
     edit_url = f"https://app.flourish.studio/visualisation/{visualisation_id}/edit"
 
-    for attempt in range(3):
+    for attempt in range(2):
         await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
-        # Allow Flourish's client-side auth redirect to settle before deciding whether
-        # a login form is present.
-        await page.wait_for_timeout(2_500)
-
-        logged_in = await login_if_needed(
-            page, email=email, password=password, diagnostics=diagnostics
-        )
-        if logged_in:
-            await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
-            await page.wait_for_timeout(2_500)
-
-        if f"/visualisation/{visualisation_id}/edit" in page.url:
-            # A late auth redirect can still happen after the URL initially looks right.
-            await page.wait_for_timeout(2_000)
-            if "/login" not in page.url:
-                return
-
-        if attempt < 2:
-            await page.wait_for_timeout(1_500)
+        state = await wait_for_editor_or_login(page, visualisation_id=visualisation_id)
+        if state == "editor":
+            return
+        if state == "login" and attempt == 0:
+            await login(page, email=email, password=password, diagnostics=diagnostics)
+            continue
+        break
 
     await capture(page, diagnostics, f"{visualisation_id}-editor-access-failed")
     raise RuntimeError(
@@ -215,12 +235,6 @@ async def republish(page: Page, *, visualisation_id: int, email: str, password: 
         diagnostics=diagnostics,
     )
 
-    try:
-        await page.wait_for_load_state("networkidle", timeout=45_000)
-    except Exception:
-        pass
-    await page.wait_for_timeout(3_000)
-
     await open_publish_panel(page, diagnostics, visualisation_id)
     if not await click_exact_republish(page):
         await capture(page, diagnostics, f"{visualisation_id}-republish-control-missing")
@@ -258,6 +272,11 @@ async def run() -> int:
             viewport={"width": 1600, "height": 1200},
         )
         page = await context.new_page()
+
+        # Authenticate once at the start of a fresh GitHub runner session, then reuse
+        # that browser context for both visualisations.
+        await login(page, email=email, password=password, diagnostics=args.diagnostics)
+
         completed: list[int] = []
         for visualisation_id in visualisations:
             await republish(
