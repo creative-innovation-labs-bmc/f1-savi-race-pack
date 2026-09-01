@@ -1,1 +1,1 @@
-Netherlands - Race 12 | manual secrets verification | 2026-09-01 Australia/Melbourne
+Netherlands - Race 12 | republish retry after login redirect fix | 2026-09-01 Australia/Melbourne
