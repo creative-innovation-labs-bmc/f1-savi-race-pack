@@ -109,8 +109,43 @@ async def unpublished_changes_button(page: Page):
     return None
 
 
+async def confirm_publish_dialog(page: Page, visualisation_id: int, diagnostics: Path) -> bool:
+    """Confirm only Flourish's exact 'Publish this visualization?' dialog."""
+    prompt = page.get_by_text("Publish this visualization?", exact=True)
+    try:
+        await prompt.first.wait_for(state="visible", timeout=8_000)
+    except Exception:
+        return False
+
+    try:
+        # Scope the generic Publish button to the exact confirmation dialog. Prefer
+        # an ARIA dialog if Flourish exposes one, otherwise use the nearest ancestor
+        # containing both the prompt and buttons. This prevents clicking any other
+        # Publish control elsewhere in the editor.
+        dialog = prompt.first.locator("xpath=ancestor::*[@role='dialog'][1]")
+        if not await dialog.count():
+            dialog = prompt.first.locator("xpath=ancestor::*[.//button][1]")
+
+        publish = dialog.get_by_role("button", name=re.compile(r"^Publish$", re.I))
+        if await publish.count() != 1 or not await publish.first.is_visible():
+            await snapshot(page, diagnostics, f"{visualisation_id}-publish-confirmation-ambiguous")
+            raise RuntimeError(
+                f"Flourish publish confirmation for {visualisation_id} did not contain exactly one Publish button."
+            )
+
+        await publish.first.click()
+        return True
+    except RuntimeError:
+        raise
+    except Exception as error:
+        await snapshot(page, diagnostics, f"{visualisation_id}-publish-confirmation-failed")
+        raise RuntimeError(
+            f"Could not safely confirm Flourish publish dialog for {visualisation_id}: {error}"
+        ) from error
+
+
 async def wait_until_published(page: Page, visualisation_id: int, diagnostics: Path) -> None:
-    for _ in range(40):
+    for _ in range(60):
         await page.wait_for_timeout(500)
         status = page.get_by_text("Unpublished changes", exact=True)
         try:
@@ -168,9 +203,12 @@ async def republish_one(page: Page, visualisation_id: int, diagnostics: Path) ->
                 )
             await icon_button.click()
 
-    await page.wait_for_timeout(2_000)
+    # Current Flourish UI asks 'Publish this visualization?' after the status-row
+    # button. Confirm only that exact dialog. Older variants may not need it.
+    await confirm_publish_dialog(page, visualisation_id, diagnostics)
 
-    # A confirmation dialog may appear in some UI variants.
+    # Older variants can instead show a second exact Republish/Publish changes
+    # control. It remains safe because these labels are unambiguous.
     confirmation = await exact_control(page, ["Republish", "Publish changes"])
     if confirmation is not None:
         try:
