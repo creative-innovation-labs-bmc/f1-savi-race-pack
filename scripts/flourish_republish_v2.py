@@ -157,7 +157,18 @@ async def wait_until_published(page: Page, visualisation_id: int, diagnostics: P
     raise RuntimeError(f"Flourish still reports unpublished changes for {visualisation_id}.")
 
 
-async def republish_one(page: Page, visualisation_id: int, diagnostics: Path) -> None:
+async def is_already_published(page: Page) -> bool:
+    unpublished = page.get_by_text("Unpublished changes", exact=True)
+    published = page.get_by_text("Published", exact=True)
+    try:
+        has_unpublished = bool(await unpublished.count() and await unpublished.first.is_visible())
+        has_published = bool(await published.count() and await published.first.is_visible())
+        return has_published and not has_unpublished
+    except Exception:
+        return False
+
+
+async def republish_one(page: Page, visualisation_id: int, diagnostics: Path) -> str:
     expected_name = PROJECTS[visualisation_id]
     edit_url = f"https://app.flourish.studio/visualisation/{visualisation_id}/edit"
     await page.goto(edit_url, wait_until="domcontentloaded", timeout=90_000)
@@ -188,6 +199,12 @@ async def republish_one(page: Page, visualisation_id: int, diagnostics: Path) ->
             raise RuntimeError(f"No Export & publish control was visible for {visualisation_id}.")
         await export_control.click()
         await page.wait_for_timeout(2_000)
+
+        # If the chart is already current, Flourish shows Published and no
+        # Unpublished changes row. That is a successful no-op, not an error.
+        if await is_already_published(page):
+            await snapshot(page, diagnostics, f"{visualisation_id}-already-published")
+            return "already_published"
 
         # 2026 Flourish free-account UI shows an 'Unpublished changes' status row
         # with a circular-arrow icon button rather than a text-labelled Republish.
@@ -222,6 +239,7 @@ async def republish_one(page: Page, visualisation_id: int, diagnostics: Path) ->
 
     if "/login" in page.url:
         raise RuntimeError(f"Flourish session was lost while republishing {visualisation_id}.")
+    return "republished"
 
 
 async def run() -> int:
@@ -247,15 +265,14 @@ async def run() -> int:
         page = await context.new_page()
         await login(page, email, password, args.diagnostics)
 
-        completed = []
+        results: dict[int, str] = {}
         for visualisation_id in ids:
-            await republish_one(page, visualisation_id, args.diagnostics)
-            completed.append(visualisation_id)
+            results[visualisation_id] = await republish_one(page, visualisation_id, args.diagnostics)
 
         await context.close()
         await browser.close()
 
-    print(json.dumps({"status": "pass", "republished": completed}))
+    print(json.dumps({"status": "pass", "visualisations": results}))
     return 0
 
 
