@@ -122,6 +122,10 @@ async def login(page: Page, *, email: str, password: str, diagnostics: Path) -> 
 
     await page.locator(submit).first.click()
 
+    # Flourish can briefly visit a non-login route during authentication and then
+    # return to /login. Require several consecutive seconds of authenticated state
+    # before treating login as successful.
+    stable_authenticated_seconds = 0
     for _ in range(45):
         await page.wait_for_timeout(1_000)
         body = (await page.locator("body").inner_text()).casefold()
@@ -143,11 +147,17 @@ async def login(page: Page, *, email: str, password: str, diagnostics: Path) -> 
         ):
             await capture(page, diagnostics, "login-rejected")
             raise RuntimeError("Flourish rejected the configured email/password login.")
-        if "/login" not in page.url and not await page.locator("input[type='password']:visible").count():
-            return
+
+        password_visible = bool(await page.locator("input[type='password']:visible").count())
+        if "/login" not in page.url and not password_visible:
+            stable_authenticated_seconds += 1
+            if stable_authenticated_seconds >= 4:
+                return
+        else:
+            stable_authenticated_seconds = 0
 
     await capture(page, diagnostics, "login-not-accepted")
-    raise RuntimeError("Flourish did not leave the login screen after submitting the configured credentials.")
+    raise RuntimeError("Flourish did not establish a stable authenticated session with the configured credentials.")
 
 
 async def wait_for_editor_or_login(page: Page, *, visualisation_id: int, timeout_seconds: int = 45) -> str:
