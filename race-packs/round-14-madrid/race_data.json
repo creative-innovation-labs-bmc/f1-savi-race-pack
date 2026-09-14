@@ -1,0 +1,1416 @@
+{
+  "metadata": {
+    "header": "Madrid - Race 14",
+    "race": "Madrid",
+    "round": 14
+  },
+  "competitor_count": 46,
+  "race_top": [
+    {
+      "rank": 1,
+      "team": "We are the competition",
+      "manager": "lou-mih",
+      "points": 185
+    },
+    {
+      "rank": 2,
+      "team": "Blue Flag Racing",
+      "manager": "pgmotts",
+      "points": 181
+    },
+    {
+      "rank": 3,
+      "team": "Maximum Points",
+      "manager": "Max Cutter",
+      "points": 176
+    },
+    {
+      "rank": 4,
+      "team": "Box Box Box",
+      "manager": "fooch",
+      "points": 166
+    },
+    {
+      "rank": 5,
+      "team": "Snoopy",
+      "manager": "JR10044",
+      "points": 159
+    },
+    {
+      "rank": 6,
+      "team": "Team Caterham",
+      "manager": "Adrian Jenkins",
+      "points": 158
+    },
+    {
+      "rank": 7,
+      "team": "Renault F1",
+      "manager": "PJF1",
+      "points": 156
+    },
+    {
+      "rank": 7,
+      "team": "Save The Engine",
+      "manager": "RichardS",
+      "points": 156
+    },
+    {
+      "rank": 9,
+      "team": "Ferrari strategy department",
+      "manager": "Goodie",
+      "points": 150
+    },
+    {
+      "rank": 10,
+      "team": "Murrays Mayhem",
+      "manager": "Martin West",
+      "points": 145
+    }
+  ],
+  "overall_top": [
+    {
+      "rank": 1,
+      "team": "Maximum Points",
+      "manager": "Max Cutter",
+      "points": 2699
+    },
+    {
+      "rank": 2,
+      "team": "Snoopy",
+      "manager": "JR10044",
+      "points": 2645
+    },
+    {
+      "rank": 3,
+      "team": "Box Box Box",
+      "manager": "fooch",
+      "points": 2549
+    },
+    {
+      "rank": 4,
+      "team": "We are the competition",
+      "manager": "lou-mih",
+      "points": 2525
+    },
+    {
+      "rank": 5,
+      "team": "Renault F1",
+      "manager": "PJF1",
+      "points": 2503
+    },
+    {
+      "rank": 6,
+      "team": "AloeVira",
+      "manager": "AloeVira",
+      "points": 2439
+    },
+    {
+      "rank": 7,
+      "team": "Save The Engine",
+      "manager": "RichardS",
+      "points": 2359
+    },
+    {
+      "rank": 8,
+      "team": "CrashBangWallop",
+      "manager": "Simon Rogerson",
+      "points": 2353
+    },
+    {
+      "rank": 9,
+      "team": "Team Caterham",
+      "manager": "Adrian Jenkins",
+      "points": 2352
+    },
+    {
+      "rank": 10,
+      "team": "Magraith Motorsport",
+      "manager": "Matt Magraith",
+      "points": 2350
+    }
+  ],
+  "podium_by_race": [
+    {
+      "header": "Australia - Race 01",
+      "race": "Australia",
+      "round": 1,
+      "first": [
+        {
+          "rank": 1,
+          "team": "The Vans",
+          "manager": "Jon Evans",
+          "points": 211
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Double Parked",
+          "manager": "Patrick Maraun",
+          "points": 200
+        },
+        {
+          "rank": 2,
+          "team": "Maximum Points",
+          "manager": "Max Cutter",
+          "points": 200
+        }
+      ],
+      "third": []
+    },
+    {
+      "header": "China - Race 02",
+      "race": "China",
+      "round": 2,
+      "first": [
+        {
+          "rank": 1,
+          "team": "Maximum Points",
+          "manager": "Max Cutter",
+          "points": 291
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "We are the competition",
+          "manager": "lou-mih",
+          "points": 268
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "lance strolls brake pedal",
+          "manager": "daniellecheng",
+          "points": 261
+        }
+      ]
+    },
+    {
+      "header": "Japan - Race 03",
+      "race": "Japan",
+      "round": 3,
+      "first": [
+        {
+          "rank": 1,
+          "team": "Maximum Points",
+          "manager": "Max Cutter",
+          "points": 172
+        },
+        {
+          "rank": 1,
+          "team": "WeeWums",
+          "manager": "Ham_27",
+          "points": 172
+        }
+      ],
+      "second": [],
+      "third": [
+        {
+          "rank": 3,
+          "team": "Renault F1",
+          "manager": "PJF1",
+          "points": 169
+        }
+      ]
+    },
+    {
+      "header": "Miami - Race 04",
+      "race": "Miami",
+      "round": 4,
+      "first": [
+        {
+          "rank": 1,
+          "team": "I thought this was Mario Kart",
+          "manager": "sl",
+          "points": 239
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Snoopy",
+          "manager": "JR10044",
+          "points": 237
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "Magraith Motorsport",
+          "manager": "Matt Magraith",
+          "points": 230
+        }
+      ]
+    },
+    {
+      "header": "Canada - Race 05",
+      "race": "Canada",
+      "round": 5,
+      "first": [
+        {
+          "rank": 1,
+          "team": "Snoopy",
+          "manager": "JR10044",
+          "points": 287
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Magraith Motorsport",
+          "manager": "Matt Magraith",
+          "points": 235
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "Bravo Fernando",
+          "manager": "Adolfo Fernández Benito",
+          "points": 232
+        }
+      ]
+    },
+    {
+      "header": "Monaco - Race 06",
+      "race": "Monaco",
+      "round": 6,
+      "first": [
+        {
+          "rank": 1,
+          "team": "Ferrari strategy department",
+          "manager": "Goodie",
+          "points": 205
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Blue Flag Racing",
+          "manager": "pgmotts",
+          "points": 194
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "CrashBangWallop",
+          "manager": "Simon Rogerson",
+          "points": 182
+        }
+      ]
+    },
+    {
+      "header": "Barcelona - Race 07",
+      "race": "Barcelona",
+      "round": 7,
+      "first": [
+        {
+          "rank": 1,
+          "team": "AloeVira",
+          "manager": "AloeVira",
+          "points": 160
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Save The Engine",
+          "manager": "RichardS",
+          "points": 150
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "Snoopy",
+          "manager": "JR10044",
+          "points": 149
+        }
+      ]
+    },
+    {
+      "header": "Austria - Race 08",
+      "race": "Austria",
+      "round": 8,
+      "first": [
+        {
+          "rank": 1,
+          "team": "CrashBangWallop",
+          "manager": "Simon Rogerson",
+          "points": 169
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Save The Engine",
+          "manager": "RichardS",
+          "points": 166
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "The Vans",
+          "manager": "Jon Evans",
+          "points": 164
+        }
+      ]
+    },
+    {
+      "header": "Great Britain - Race 09",
+      "race": "Great Britain",
+      "round": 9,
+      "first": [
+        {
+          "rank": 1,
+          "team": "Snoopy",
+          "manager": "JR10044",
+          "points": 265
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Bravo Fernando",
+          "manager": "Adolfo Fernández Benito",
+          "points": 248
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "AloeVira",
+          "manager": "AloeVira",
+          "points": 247
+        }
+      ]
+    },
+    {
+      "header": "Belgium - Race 10",
+      "race": "Belgium",
+      "round": 10,
+      "first": [
+        {
+          "rank": 1,
+          "team": "We are the competition",
+          "manager": "lou-mih",
+          "points": 191
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "vansF1",
+          "manager": "Andries",
+          "points": 176
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "Renault F1",
+          "manager": "PJF1",
+          "points": 171
+        }
+      ]
+    },
+    {
+      "header": "Hungary - Race 11",
+      "race": "Hungary",
+      "round": 11,
+      "first": [
+        {
+          "rank": 1,
+          "team": "We are the competition",
+          "manager": "lou-mih",
+          "points": 159
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "vansF1",
+          "manager": "Andries",
+          "points": 156
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "Save The Engine",
+          "manager": "RichardS",
+          "points": 151
+        }
+      ]
+    },
+    {
+      "header": "Netherlands - Race 12",
+      "race": "Netherlands",
+      "round": 12,
+      "first": [
+        {
+          "rank": 1,
+          "team": "Maximum Points",
+          "manager": "Max Cutter",
+          "points": 254
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Save The Engine",
+          "manager": "RichardS",
+          "points": 250
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "AloeVira",
+          "manager": "AloeVira",
+          "points": 237
+        }
+      ]
+    },
+    {
+      "header": "Italy - Race 13",
+      "race": "Italy",
+      "round": 13,
+      "first": [
+        {
+          "rank": 1,
+          "team": "CrashBangWallop",
+          "manager": "Simon Rogerson",
+          "points": 227
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Box Box Box",
+          "manager": "fooch",
+          "points": 222
+        },
+        {
+          "rank": 2,
+          "team": "We are the competition",
+          "manager": "lou-mih",
+          "points": 222
+        }
+      ],
+      "third": []
+    },
+    {
+      "header": "Madrid - Race 14",
+      "race": "Madrid",
+      "round": 14,
+      "first": [
+        {
+          "rank": 1,
+          "team": "We are the competition",
+          "manager": "lou-mih",
+          "points": 185
+        }
+      ],
+      "second": [
+        {
+          "rank": 2,
+          "team": "Blue Flag Racing",
+          "manager": "pgmotts",
+          "points": 181
+        }
+      ],
+      "third": [
+        {
+          "rank": 3,
+          "team": "Maximum Points",
+          "manager": "Max Cutter",
+          "points": 176
+        }
+      ]
+    }
+  ],
+  "podium_tally": [
+    {
+      "team": "We are the competition",
+      "manager": "lou-mih",
+      "first": 3,
+      "first_change": 1,
+      "second": 2,
+      "second_change": 0,
+      "third": 0,
+      "third_change": 0,
+      "total": 5,
+      "total_change": 1
+    },
+    {
+      "team": "Maximum Points",
+      "manager": "Max Cutter",
+      "first": 3,
+      "first_change": 0,
+      "second": 1,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 1,
+      "total": 5,
+      "total_change": 1
+    },
+    {
+      "team": "Snoopy",
+      "manager": "JR10044",
+      "first": 2,
+      "first_change": 0,
+      "second": 1,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 0,
+      "total": 4,
+      "total_change": 0
+    },
+    {
+      "team": "Save The Engine",
+      "manager": "RichardS",
+      "first": 0,
+      "first_change": 0,
+      "second": 3,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 0,
+      "total": 4,
+      "total_change": 0
+    },
+    {
+      "team": "CrashBangWallop",
+      "manager": "Simon Rogerson",
+      "first": 2,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 0,
+      "total": 3,
+      "total_change": 0
+    },
+    {
+      "team": "AloeVira",
+      "manager": "AloeVira",
+      "first": 1,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 2,
+      "third_change": 0,
+      "total": 3,
+      "total_change": 0
+    },
+    {
+      "team": "The Vans",
+      "manager": "Jon Evans",
+      "first": 1,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 0,
+      "total": 2,
+      "total_change": 0
+    },
+    {
+      "team": "Blue Flag Racing",
+      "manager": "pgmotts",
+      "first": 0,
+      "first_change": 0,
+      "second": 2,
+      "second_change": 1,
+      "third": 0,
+      "third_change": 0,
+      "total": 2,
+      "total_change": 1
+    },
+    {
+      "team": "vansF1",
+      "manager": "Andries",
+      "first": 0,
+      "first_change": 0,
+      "second": 2,
+      "second_change": 0,
+      "third": 0,
+      "third_change": 0,
+      "total": 2,
+      "total_change": 0
+    },
+    {
+      "team": "Bravo Fernando",
+      "manager": "Adolfo Fernández Benito",
+      "first": 0,
+      "first_change": 0,
+      "second": 1,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 0,
+      "total": 2,
+      "total_change": 0
+    },
+    {
+      "team": "Magraith Motorsport",
+      "manager": "Matt Magraith",
+      "first": 0,
+      "first_change": 0,
+      "second": 1,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 0,
+      "total": 2,
+      "total_change": 0
+    },
+    {
+      "team": "Renault F1",
+      "manager": "PJF1",
+      "first": 0,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 2,
+      "third_change": 0,
+      "total": 2,
+      "total_change": 0
+    },
+    {
+      "team": "Ferrari strategy department",
+      "manager": "Goodie",
+      "first": 1,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 0,
+      "third_change": 0,
+      "total": 1,
+      "total_change": 0
+    },
+    {
+      "team": "I thought this was Mario Kart",
+      "manager": "sl",
+      "first": 1,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 0,
+      "third_change": 0,
+      "total": 1,
+      "total_change": 0
+    },
+    {
+      "team": "WeeWums",
+      "manager": "Ham_27",
+      "first": 1,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 0,
+      "third_change": 0,
+      "total": 1,
+      "total_change": 0
+    },
+    {
+      "team": "Box Box Box",
+      "manager": "fooch",
+      "first": 0,
+      "first_change": 0,
+      "second": 1,
+      "second_change": 0,
+      "third": 0,
+      "third_change": 0,
+      "total": 1,
+      "total_change": 0
+    },
+    {
+      "team": "Double Parked",
+      "manager": "Patrick Maraun",
+      "first": 0,
+      "first_change": 0,
+      "second": 1,
+      "second_change": 0,
+      "third": 0,
+      "third_change": 0,
+      "total": 1,
+      "total_change": 0
+    },
+    {
+      "team": "lance strolls brake pedal",
+      "manager": "daniellecheng",
+      "first": 0,
+      "first_change": 0,
+      "second": 0,
+      "second_change": 0,
+      "third": 1,
+      "third_change": 0,
+      "total": 1,
+      "total_change": 0
+    }
+  ],
+  "biggest_movers": [
+    {
+      "team": "Blue Flag Racing",
+      "manager": "pgmotts",
+      "previous_rank": 13,
+      "current_rank": 11,
+      "movement": 2,
+      "points": 2349
+    },
+    {
+      "team": "bubblegun",
+      "manager": "Ruan01",
+      "previous_rank": 33,
+      "current_rank": 31,
+      "movement": 2,
+      "points": 1913
+    },
+    {
+      "team": "Ferrari strategy department",
+      "manager": "Goodie",
+      "previous_rank": 21,
+      "current_rank": 19,
+      "movement": 2,
+      "points": 2152
+    },
+    {
+      "team": "Murrays Mayhem",
+      "manager": "Martin West",
+      "previous_rank": 25,
+      "current_rank": 23,
+      "movement": 2,
+      "points": 2042
+    },
+    {
+      "team": "Save The Engine",
+      "manager": "RichardS",
+      "previous_rank": 9,
+      "current_rank": 7,
+      "movement": 2,
+      "points": 2359
+    },
+    {
+      "team": "Watts Up Racing",
+      "manager": "NellieWhiteside",
+      "previous_rank": 31,
+      "current_rank": 29,
+      "movement": 2,
+      "points": 1938
+    },
+    {
+      "team": "Bravo Fernando",
+      "manager": "Adolfo Fernández Benito",
+      "previous_rank": 15,
+      "current_rank": 14,
+      "movement": 1,
+      "points": 2283
+    },
+    {
+      "team": "Feeling Bullish",
+      "manager": "Devmal",
+      "previous_rank": 43,
+      "current_rank": 42,
+      "movement": 1,
+      "points": 1473
+    },
+    {
+      "team": "lance strolls brake pedal",
+      "manager": "daniellecheng",
+      "previous_rank": 18,
+      "current_rank": 17,
+      "movement": 1,
+      "points": 2200
+    },
+    {
+      "team": "QuantumSpeed",
+      "manager": "redflag",
+      "previous_rank": 40,
+      "current_rank": 39,
+      "movement": 1,
+      "points": 1705
+    }
+  ],
+  "biggest_drops": [
+    {
+      "team": "Magraith Motorsport",
+      "manager": "Matt Magraith",
+      "previous_rank": 7,
+      "current_rank": 10,
+      "movement": -3,
+      "points": 2350
+    },
+    {
+      "team": "Doohanok",
+      "manager": "garettann",
+      "previous_rank": 30,
+      "current_rank": 32,
+      "movement": -2,
+      "points": 1910
+    },
+    {
+      "team": "Car Go Vroom Vroom Super Fast",
+      "manager": "Emily Tantau",
+      "previous_rank": 42,
+      "current_rank": 43,
+      "movement": -1,
+      "points": 1443
+    },
+    {
+      "team": "Double Parked",
+      "manager": "Patrick Maraun",
+      "previous_rank": 20,
+      "current_rank": 21,
+      "movement": -1,
+      "points": 2097
+    },
+    {
+      "team": "Give me the drink",
+      "manager": "Zeke",
+      "previous_rank": 29,
+      "current_rank": 30,
+      "movement": -1,
+      "points": 1934
+    },
+    {
+      "team": "HHHHHH",
+      "manager": "harves",
+      "previous_rank": 12,
+      "current_rank": 13,
+      "movement": -1,
+      "points": 2293
+    },
+    {
+      "team": "Howdy Audi",
+      "manager": "Pete M",
+      "previous_rank": 17,
+      "current_rank": 18,
+      "movement": -1,
+      "points": 2173
+    },
+    {
+      "team": "I thought this was Mario Kart",
+      "manager": "sl",
+      "previous_rank": 27,
+      "current_rank": 28,
+      "movement": -1,
+      "points": 1939
+    },
+    {
+      "team": "joyride",
+      "manager": "joydelacruz",
+      "previous_rank": 23,
+      "current_rank": 24,
+      "movement": -1,
+      "points": 2035
+    },
+    {
+      "team": "No Michael no",
+      "manager": "michael_sideris",
+      "previous_rank": 11,
+      "current_rank": 12,
+      "movement": -1,
+      "points": 2297
+    }
+  ],
+  "latest_adjustments": [],
+  "all_adjustments": [
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "ALMOCO",
+      "manager": "Scorched Almond",
+      "race_points": 109,
+      "cumulative_delta": 100,
+      "adjustment": -9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "AloeVira",
+      "manager": "AloeVira",
+      "race_points": 160,
+      "cumulative_delta": 190,
+      "adjustment": 30
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "AureConstructors Championship",
+      "manager": "Corey McDonald",
+      "race_points": 99,
+      "cumulative_delta": 111,
+      "adjustment": 12
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Blue Flag Racing",
+      "manager": "pgmotts",
+      "race_points": 98,
+      "cumulative_delta": 93,
+      "adjustment": -5
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Box Box Box",
+      "manager": "fooch",
+      "race_points": 128,
+      "cumulative_delta": 141,
+      "adjustment": 13
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Bravo Fernando",
+      "manager": "Adolfo Fernández Benito",
+      "race_points": 127,
+      "cumulative_delta": 130,
+      "adjustment": 3
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "bubblegun",
+      "manager": "Ruan01",
+      "race_points": 58,
+      "cumulative_delta": 53,
+      "adjustment": -5
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Buzzin with Eddie",
+      "manager": "Alan Thomas",
+      "race_points": 70,
+      "cumulative_delta": 64,
+      "adjustment": -6
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Car Go Vroom Vroom Super Fast",
+      "manager": "Emily Tantau",
+      "race_points": 52,
+      "cumulative_delta": 47,
+      "adjustment": -5
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "CrashBangWallop",
+      "manager": "Simon Rogerson",
+      "race_points": 109,
+      "cumulative_delta": 120,
+      "adjustment": 11
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Doohanok",
+      "manager": "garettann",
+      "race_points": 145,
+      "cumulative_delta": 178,
+      "adjustment": 33
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Double Parked",
+      "manager": "Patrick Maraun",
+      "race_points": 140,
+      "cumulative_delta": 151,
+      "adjustment": 11
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Feeling Bullish",
+      "manager": "Devmal",
+      "race_points": 98,
+      "cumulative_delta": 107,
+      "adjustment": 9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Ferrari strategy department",
+      "manager": "Goodie",
+      "race_points": 97,
+      "cumulative_delta": 87,
+      "adjustment": -10
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Give me the drink",
+      "manager": "Zeke",
+      "race_points": 62,
+      "cumulative_delta": 58,
+      "adjustment": -4
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "HHHHHH",
+      "manager": "harves",
+      "race_points": 125,
+      "cumulative_delta": 155,
+      "adjustment": 30
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Howdy Audi",
+      "manager": "Pete M",
+      "race_points": 125,
+      "cumulative_delta": 121,
+      "adjustment": -4
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "I thought this was Mario Kart",
+      "manager": "sl",
+      "race_points": 126,
+      "cumulative_delta": 134,
+      "adjustment": 8
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Ibis2026",
+      "manager": "Pri Kumar",
+      "race_points": 85,
+      "cumulative_delta": 75,
+      "adjustment": -10
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "joyride",
+      "manager": "joydelacruz",
+      "race_points": 126,
+      "cumulative_delta": 133,
+      "adjustment": 7
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Just an Inchident",
+      "manager": "CharlotteWareham",
+      "race_points": 85,
+      "cumulative_delta": 88,
+      "adjustment": 3
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "lance strolls brake pedal",
+      "manager": "daniellecheng",
+      "race_points": 114,
+      "cumulative_delta": 126,
+      "adjustment": 12
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Machined Wheel Nut",
+      "manager": "Jean Alesi",
+      "race_points": 96,
+      "cumulative_delta": 90,
+      "adjustment": -6
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Magraith Motorsport",
+      "manager": "Matt Magraith",
+      "race_points": 136,
+      "cumulative_delta": 143,
+      "adjustment": 7
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Maximum Points",
+      "manager": "Max Cutter",
+      "race_points": 118,
+      "cumulative_delta": 135,
+      "adjustment": 17
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Murrays Mayhem",
+      "manager": "Martin West",
+      "race_points": 69,
+      "cumulative_delta": 59,
+      "adjustment": -10
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Need More Speed",
+      "manager": "Tanuja West",
+      "race_points": 125,
+      "cumulative_delta": 121,
+      "adjustment": -4
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "No Michael no",
+      "manager": "michael_sideris",
+      "race_points": 121,
+      "cumulative_delta": 151,
+      "adjustment": 30
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "No Mikey No",
+      "manager": "Kevin de Silva",
+      "race_points": 73,
+      "cumulative_delta": 69,
+      "adjustment": -4
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Nord Racing",
+      "manager": "ariel_h",
+      "race_points": 108,
+      "cumulative_delta": 100,
+      "adjustment": -8
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Octopus Ross",
+      "manager": "deciMal_oNion",
+      "race_points": 118,
+      "cumulative_delta": 140,
+      "adjustment": 22
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Petch Racing",
+      "manager": "Christiaan",
+      "race_points": 141,
+      "cumulative_delta": 127,
+      "adjustment": -14
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Piastronimical Speedy",
+      "manager": "Chelsea Innes",
+      "race_points": 91,
+      "cumulative_delta": 77,
+      "adjustment": -14
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Piastroying The Grid",
+      "manager": "BOS",
+      "race_points": 89,
+      "cumulative_delta": 98,
+      "adjustment": 9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "QuantumSpeed",
+      "manager": "redflag",
+      "race_points": 120,
+      "cumulative_delta": 110,
+      "adjustment": -10
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Renault F1",
+      "manager": "PJF1",
+      "race_points": 114,
+      "cumulative_delta": 123,
+      "adjustment": 9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Save The Engine",
+      "manager": "RichardS",
+      "race_points": 150,
+      "cumulative_delta": 159,
+      "adjustment": 9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Snoopy",
+      "manager": "JR10044",
+      "race_points": 149,
+      "cumulative_delta": 162,
+      "adjustment": 13
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Strolling to Last Place",
+      "manager": "dmack",
+      "race_points": 65,
+      "cumulative_delta": 61,
+      "adjustment": -4
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Team Caterham",
+      "manager": "Adrian Jenkins",
+      "race_points": 117,
+      "cumulative_delta": 126,
+      "adjustment": 9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "The Vans",
+      "manager": "Jon Evans",
+      "race_points": 135,
+      "cumulative_delta": 148,
+      "adjustment": 13
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "vansF1",
+      "manager": "Andries",
+      "race_points": 72,
+      "cumulative_delta": 81,
+      "adjustment": 9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "Watts Up Racing",
+      "manager": "NellieWhiteside",
+      "race_points": 71,
+      "cumulative_delta": 80,
+      "adjustment": 9
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "We are the competition",
+      "manager": "lou-mih",
+      "race_points": 141,
+      "cumulative_delta": 148,
+      "adjustment": 7
+    },
+    {
+      "race": "Barcelona",
+      "round": 7,
+      "team": "WeeWums",
+      "manager": "Ham_27",
+      "race_points": 100,
+      "cumulative_delta": 96,
+      "adjustment": -4
+    },
+    {
+      "race": "Austria",
+      "round": 8,
+      "team": "Blue Flag Racing",
+      "manager": "pgmotts",
+      "race_points": 149,
+      "cumulative_delta": 139,
+      "adjustment": -10
+    },
+    {
+      "race": "Austria",
+      "round": 8,
+      "team": "Magraith Motorsport",
+      "manager": "Matt Magraith",
+      "race_points": 115,
+      "cumulative_delta": 95,
+      "adjustment": -20
+    },
+    {
+      "race": "Great Britain",
+      "round": 9,
+      "team": "Magraith Motorsport",
+      "manager": "Matt Magraith",
+      "race_points": 232,
+      "cumulative_delta": 222,
+      "adjustment": -10
+    },
+    {
+      "race": "Belgium",
+      "round": 10,
+      "team": "We are the competition",
+      "manager": "lou-mih",
+      "race_points": 191,
+      "cumulative_delta": 171,
+      "adjustment": -20
+    },
+    {
+      "race": "Netherlands",
+      "round": 12,
+      "team": "Buzzin with Eddie",
+      "manager": "Alan Thomas",
+      "race_points": 146,
+      "cumulative_delta": 136,
+      "adjustment": -10
+    },
+    {
+      "race": "Italy",
+      "round": 13,
+      "team": "Buzzin with Eddie",
+      "manager": "Alan Thomas",
+      "race_points": 126,
+      "cumulative_delta": 116,
+      "adjustment": -10
+    },
+    {
+      "race": "Italy",
+      "round": 13,
+      "team": "Save The Engine",
+      "manager": "RichardS",
+      "race_points": 195,
+      "cumulative_delta": 185,
+      "adjustment": -10
+    }
+  ],
+  "qc": {
+    "status": "pass",
+    "errors": [],
+    "warnings": [
+      "Detected 52 cumulative corrections across the season. The cumulative CSV is treated as authoritative rather than recalculated from race points."
+    ],
+    "checks": {
+      "individual_rows": 46,
+      "cumulative_rows": 46,
+      "race_columns": 14,
+      "latest_round": 14,
+      "latest_race": "Madrid",
+      "non_zero_adjustments": 52,
+      "latest_round_adjustments": 0
+    }
+  },
+  "flourish": {
+    "races_visualisation_id": 23536150,
+    "leaderboard_visualisation_id": 23537908,
+    "races_edit_url": "https://app.flourish.studio/visualisation/23536150/edit",
+    "leaderboard_edit_url": "https://app.flourish.studio/visualisation/23537908/edit"
+  },
+  "files": {
+    "individual_csv": "F1_Season2_Individual_R14_Madrid.csv",
+    "cumulative_csv": "F1_Season2_Cumulative_R14_Madrid_GRAPH_FIXED.csv"
+  }
+}

@@ -1,0 +1,112 @@
+F1 SAVI LEAGUE / ROUND 14 / MADRID
+
+Madrid race top 10
++-----+-----------------------------+----------------+-----+
+| Pos | Team                        | Manager        | Pts |
++-----+-----------------------------+----------------+-----+
+| 1   | We are the competition      | lou-mih        | 185 |
+| 2   | Blue Flag Racing            | pgmotts        | 181 |
+| 3   | Maximum Points              | Max Cutter     | 176 |
+| 4   | Box Box Box                 | fooch          | 166 |
+| 5   | Snoopy                      | JR10044        | 159 |
+| 6   | Team Caterham               | Adrian Jenkins | 158 |
+| 7   | Renault F1                  | PJF1           | 156 |
+| 7   | Save The Engine             | RichardS       | 156 |
+| 9   | Ferrari strategy department | Goodie         | 150 |
+| 10  | Murrays Mayhem              | Martin West    | 145 |
++-----+-----------------------------+----------------+-----+
+
+Overall top 10 after Madrid
++-----+------------------------+----------------+------+
+| Pos | Team                   | Manager        | Pts  |
++-----+------------------------+----------------+------+
+| 1   | Maximum Points         | Max Cutter     | 2699 |
+| 2   | Snoopy                 | JR10044        | 2645 |
+| 3   | Box Box Box            | fooch          | 2549 |
+| 4   | We are the competition | lou-mih        | 2525 |
+| 5   | Renault F1             | PJF1           | 2503 |
+| 6   | AloeVira               | AloeVira       | 2439 |
+| 7   | Save The Engine        | RichardS       | 2359 |
+| 8   | CrashBangWallop        | Simon Rogerson | 2353 |
+| 9   | Team Caterham          | Adrian Jenkins | 2352 |
+| 10  | Magraith Motorsport    | Matt Magraith  | 2350 |
++-----+------------------------+----------------+------+
+
+Podium tally after Race 14
++-------------------------------+-------------------------+--------+--------+--------+---------+
+| Team name                     | Manager                 | 🥇 1st  | 🥈 2nd  | 🥉 3rd  | 🏅 Total |
++-------------------------------+-------------------------+--------+--------+--------+---------+
+| We are the competition        | lou-mih                 | 3 (+1) | 2 (+0) | 0 (+0) | 5 (+1)  |
+| Maximum Points                | Max Cutter              | 3 (+0) | 1 (+0) | 1 (+1) | 5 (+1)  |
+| Snoopy                        | JR10044                 | 2 (+0) | 1 (+0) | 1 (+0) | 4 (+0)  |
+| Save The Engine               | RichardS                | 0 (+0) | 3 (+0) | 1 (+0) | 4 (+0)  |
+| CrashBangWallop               | Simon Rogerson          | 2 (+0) | 0 (+0) | 1 (+0) | 3 (+0)  |
+| AloeVira                      | AloeVira                | 1 (+0) | 0 (+0) | 2 (+0) | 3 (+0)  |
+| The Vans                      | Jon Evans               | 1 (+0) | 0 (+0) | 1 (+0) | 2 (+0)  |
+| Blue Flag Racing              | pgmotts                 | 0 (+0) | 2 (+1) | 0 (+0) | 2 (+1)  |
+| vansF1                        | Andries                 | 0 (+0) | 2 (+0) | 0 (+0) | 2 (+0)  |
+| Bravo Fernando                | Adolfo Fernández Benito | 0 (+0) | 1 (+0) | 1 (+0) | 2 (+0)  |
+| Magraith Motorsport           | Matt Magraith           | 0 (+0) | 1 (+0) | 1 (+0) | 2 (+0)  |
+| Renault F1                    | PJF1                    | 0 (+0) | 0 (+0) | 2 (+0) | 2 (+0)  |
+| Ferrari strategy department   | Goodie                  | 1 (+0) | 0 (+0) | 0 (+0) | 1 (+0)  |
+| I thought this was Mario Kart | sl                      | 1 (+0) | 0 (+0) | 0 (+0) | 1 (+0)  |
+| WeeWums                       | Ham_27                  | 1 (+0) | 0 (+0) | 0 (+0) | 1 (+0)  |
+| Box Box Box                   | fooch                   | 0 (+0) | 1 (+0) | 0 (+0) | 1 (+0)  |
+| Double Parked                 | Patrick Maraun          | 0 (+0) | 1 (+0) | 0 (+0) | 1 (+0)  |
+| lance strolls brake pedal     | daniellecheng           | 0 (+0) | 0 (+0) | 1 (+0) | 1 (+0)  |
++-------------------------------+-------------------------+--------+--------+--------+---------+
+
+Podium by race
++-------------------------+-------------------------------+--------------------------------------+---------------------------+
+| Race                    | 🥇 1st                         | 🥈 2nd                                | 🥉 3rd                     |
++-------------------------+-------------------------------+--------------------------------------+---------------------------+
+| Australia - Race 01     | The Vans                      | Double Parked / Maximum Points       |                           |
+| China - Race 02         | Maximum Points                | We are the competition               | lance strolls brake pedal |
+| Japan - Race 03         | Maximum Points / WeeWums      |                                      | Renault F1                |
+| Miami - Race 04         | I thought this was Mario Kart | Snoopy                               | Magraith Motorsport       |
+| Canada - Race 05        | Snoopy                        | Magraith Motorsport                  | Bravo Fernando            |
+| Monaco - Race 06        | Ferrari strategy department   | Blue Flag Racing                     | CrashBangWallop           |
+| Barcelona - Race 07     | AloeVira                      | Save The Engine                      | Snoopy                    |
+| Austria - Race 08       | CrashBangWallop               | Save The Engine                      | The Vans                  |
+| Great Britain - Race 09 | Snoopy                        | Bravo Fernando                       | AloeVira                  |
+| Belgium - Race 10       | We are the competition        | vansF1                               | Renault F1                |
+| Hungary - Race 11       | We are the competition        | vansF1                               | Save The Engine           |
+| Netherlands - Race 12   | Maximum Points                | Save The Engine                      | AloeVira                  |
+| Italy - Race 13         | CrashBangWallop               | Box Box Box / We are the competition |                           |
+| Madrid - Race 14        | We are the competition        | Blue Flag Racing                     | Maximum Points            |
++-------------------------+-------------------------------+--------------------------------------+---------------------------+
+
+Biggest movers
++-----------------------------+-------------------------+----------+
+| Team                        | Manager                 | Movement |
++-----------------------------+-------------------------+----------+
+| Blue Flag Racing            | pgmotts                 | +2       |
+| bubblegun                   | Ruan01                  | +2       |
+| Ferrari strategy department | Goodie                  | +2       |
+| Murrays Mayhem              | Martin West             | +2       |
+| Save The Engine             | RichardS                | +2       |
+| Watts Up Racing             | NellieWhiteside         | +2       |
+| Bravo Fernando              | Adolfo Fernández Benito | +1       |
+| Feeling Bullish             | Devmal                  | +1       |
+| lance strolls brake pedal   | daniellecheng           | +1       |
+| QuantumSpeed                | redflag                 | +1       |
++-----------------------------+-------------------------+----------+
+
+Biggest drops
++-------------------------------+-----------------+----------+
+| Team                          | Manager         | Movement |
++-------------------------------+-----------------+----------+
+| Magraith Motorsport           | Matt Magraith   | -3       |
+| Doohanok                      | garettann       | -2       |
+| Car Go Vroom Vroom Super Fast | Emily Tantau    | -1       |
+| Double Parked                 | Patrick Maraun  | -1       |
+| Give me the drink             | Zeke            | -1       |
+| HHHHHH                        | harves          | -1       |
+| Howdy Audi                    | Pete M          | -1       |
+| I thought this was Mario Kart | sl              | -1       |
+| joyride                       | joydelacruz     | -1       |
+| No Michael no                 | michael_sideris | -1       |
++-------------------------------+-----------------+----------+
+
+Interactive graphs updated
+https://creative-innovation-labs-bmc.github.io/f1-savi-league/

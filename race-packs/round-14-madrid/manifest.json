@@ -1,0 +1,16 @@
+{
+  "round": 14,
+  "race": "Madrid",
+  "slug": "madrid",
+  "files": {
+    "F1_Season2_Cumulative_R14_Madrid_GRAPH_FIXED.csv": "7f6d0eed5530d9eba0b4f398d4e828ab68749ba739b2c1608da08c21351c080f",
+    "F1_Season2_Individual_R14_Madrid.csv": "968cd2dcdcc0b221bea05b9a994e7bc11f73910583bba0014c4b737f799f1b7d",
+    "QC_REPORT.md": "622669262dab8ec87093e1290dbe4e355630927b48b1c03cea8fdc084af8a05f",
+    "Teams_Update.html": "db181b3918af0ddc0031427ef78838ee9191f392ebef67fcefb526db6551bbed",
+    "Teams_Update.txt": "5e4711adf1e360546d3d8ad030bd10d3d44a2e4e4184964bdfeac7d7b9f4968e",
+    "latest_adjustments.csv": "731a1531d21278de0f4013e57ae852349c803cd95dcbb831ded3b22e191ed21d",
+    "overall_top_10.csv": "7324d815a8fbb0e190b5f6280a2020f578ec4106430b1ab323e2d801bc7e5ea0",
+    "race_data.json": "8838aa8a1bdd87ae164b738462ed811d2a9b6d3446ab2e3bdd3242bde643d4ee",
+    "race_top_10.csv": "0af5e3428609433b3291007f0d8fd65f6ccc8c2b83a28a788a0312db7ffa4bd5"
+  }
+}

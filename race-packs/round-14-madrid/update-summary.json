@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "login": {
+    "login_attempted": true,
+    "login_attempts": 1,
+    "final_url": "https://fantasygp.com/league/?lid=10527",
+    "authenticated": true
+  },
+  "update": {
+    "status": "updated",
+    "round": 14,
+    "race": "Madrid",
+    "competitors": 46,
+    "renamed_teams": []
+  },
+  "individual_csv": "build/fantasygp-update/updated_individual.csv",
+  "cumulative_csv": "build/fantasygp-update/updated_cumulative.csv"
+}
