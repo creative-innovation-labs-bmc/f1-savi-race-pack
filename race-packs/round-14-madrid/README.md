@@ -14,3 +14,5 @@ QC status: PASS
 - JR10044 remains unmapped and is not assigned a guessed identity
 
 The package contains the source CSVs, race data, manifest, QC report, Teams update, poster, broadcast voice-over and copy-ready work-channel update.
+
+`fantasygp-diagnostics/fantasygp-snapshot.json` preserves both FantasyGP pagination responses for the Madrid race and overall standings. Each dataset contains 46 competitors across pages of 25 and 21 entries. The accompanying PNG is the authenticated standings capture produced by the update workflow.
