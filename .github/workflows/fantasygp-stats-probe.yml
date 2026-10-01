@@ -43,7 +43,7 @@ jobs:
               await authenticated_login(page,league_url='https://fantasygp.com/league/?lid=10527',username=os.environ['FANTASYGP_USERNAME'],password=os.environ['FANTASYGP_PASSWORD'])
               await page.goto('https://fantasygp.com/stats/',wait_until='domcontentloaded',timeout=60000); await page.wait_for_timeout(2000)
               async def ajax(action,params):
-                return await page.evaluate('''({action,params}) => new Promise(resolve => { jQuery.ajax({url: ajaxurl, method:'POST', data:{action,...params}, success:r=>resolve(r), error:x=>resolve({error:true,status:x.status,text:x.responseText})}); })''',{'action':action,'params':params})
+                return await page.evaluate('''({action,params}) => new Promise(resolve => { jQuery.ajax({url: 'https://fantasygp.com/wp-admin/admin-ajax.php', method:'POST', data:{action,...params}, success:r=>resolve(r), error:x=>resolve({error:true,status:x.status,text:x.responseText})}); })''',{'action':action,'params':params})
               drivers=await ajax('ffgp_get_stats',{'season':'2026','data_type':'driver'})
               cars=await ajax('ffgp_get_stats',{'season':'2026','data_type':'car'})
               markets=await ajax('ffgp_get_markets',{})
