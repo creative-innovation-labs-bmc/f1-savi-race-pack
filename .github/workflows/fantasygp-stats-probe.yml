@@ -26,12 +26,12 @@ jobs:
         run: |
           python -m pip install playwright==1.54.0
           python -m playwright install --with-deps chromium
-      - name: Capture stats read-only
+      - name: Capture current FantasyGP stats read-only
         shell: bash
         run: |
           mkdir -p build/stats-probe
           python - <<'PY'
-          import asyncio, json, os, sys
+          import asyncio,json,os,sys
           from pathlib import Path
           from playwright.async_api import async_playwright
           sys.path.insert(0,'scripts')
@@ -39,21 +39,20 @@ jobs:
           OUT=Path('build/stats-probe')
           async def main():
             async with async_playwright() as p:
-              browser=await p.chromium.launch(headless=True)
-              ctx=await browser.new_context(viewport={'width':1600,'height':1200})
-              page=await ctx.new_page()
+              b=await p.chromium.launch(headless=True); c=await b.new_context(); page=await c.new_page()
               await authenticated_login(page,league_url='https://fantasygp.com/league/?lid=10527',username=os.environ['FANTASYGP_USERNAME'],password=os.environ['FANTASYGP_PASSWORD'])
-              for name,url in [('stats','https://fantasygp.com/stats/'),('history','https://fantasygp.com/team-history/')]:
-                await page.goto(url,wait_until='domcontentloaded',timeout=60000)
-                await page.wait_for_timeout(2500)
-                body=await page.locator('body').inner_text()
-                html=await page.content()
-                els=await page.evaluate('''() => [...document.querySelectorAll('table,select,button,a,input,[data-toggle],[data-target]')].map(e=>({tag:e.tagName,text:(e.innerText||e.value||'').trim().slice(0,500),id:e.id||'',cls:e.className||'',attrs:Object.fromEntries([...e.attributes].map(a=>[a.name,a.value]))}))''')
-                (OUT/f'{name}.txt').write_text(body,encoding='utf-8')
-                (OUT/f'{name}.html').write_text(html,encoding='utf-8')
-                (OUT/f'{name}-elements.json').write_text(json.dumps(els,indent=2,ensure_ascii=False),encoding='utf-8')
-                await page.screenshot(path=str(OUT/f'{name}.png'),full_page=True)
-              await browser.close()
+              await page.goto('https://fantasygp.com/stats/',wait_until='domcontentloaded',timeout=60000); await page.wait_for_timeout(2000)
+              async def ajax(action,params):
+                return await page.evaluate('''({action,params}) => new Promise(resolve => { jQuery.ajax({url: ajaxurl, method:'POST', data:{action,...params}, success:r=>resolve(r), error:x=>resolve({error:true,status:x.status,text:x.responseText})}); })''',{'action':action,'params':params})
+              drivers=await ajax('ffgp_get_stats',{'season':'2026','data_type':'driver'})
+              cars=await ajax('ffgp_get_stats',{'season':'2026','data_type':'car'})
+              markets=await ajax('ffgp_get_markets',{})
+              quick=await ajax('ffgp_get_quickstats',{})
+              (OUT/'drivers.json').write_text(json.dumps(drivers,indent=2,ensure_ascii=False),encoding='utf-8')
+              (OUT/'cars.json').write_text(json.dumps(cars,indent=2,ensure_ascii=False),encoding='utf-8')
+              (OUT/'markets.json').write_text(json.dumps(markets,indent=2,ensure_ascii=False),encoding='utf-8')
+              (OUT/'quickstats.json').write_text(json.dumps(quick,indent=2,ensure_ascii=False),encoding='utf-8')
+              await b.close()
           asyncio.run(main())
           PY
       - uses: actions/upload-artifact@v6
