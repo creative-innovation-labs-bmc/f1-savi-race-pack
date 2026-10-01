@@ -1,0 +1,107 @@
+name: FantasyGP account probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fantasygp-account-probe.yml'
+      - 'data/fantasygp-account-probe-trigger.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FANTASYGP_USERNAME: ${{ secrets.FANTASYGP_USERNAME }}
+      FANTASYGP_PASSWORD: ${{ secrets.FANTASYGP_PASSWORD }}
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: |
+          python -m pip install playwright==1.54.0
+          python -m playwright install --with-deps chromium
+      - name: Capture account pages read-only
+        shell: bash
+        run: |
+          mkdir -p build/account-probe
+          python - <<'PY'
+          import asyncio, json, os, re, sys
+          from pathlib import Path
+          from urllib.parse import urljoin, urlparse
+          from playwright.async_api import async_playwright
+
+          sys.path.insert(0, 'scripts')
+          from fantasygp_auth_runner import authenticated_login
+
+          OUT = Path('build/account-probe')
+          LEAGUE = 'https://fantasygp.com/league/?lid=10527'
+          USER = os.environ['FANTASYGP_USERNAME']
+          PASS = os.environ['FANTASYGP_PASSWORD']
+
+          async def main():
+              async with async_playwright() as p:
+                  browser = await p.chromium.launch(headless=True)
+                  context = await browser.new_context(viewport={'width': 1440, 'height': 1100})
+                  page = await context.new_page()
+                  auth = await authenticated_login(page, league_url=LEAGUE, username=USER, password=PASS)
+                  await page.screenshot(path=str(OUT/'league.png'), full_page=True)
+                  anchors = await page.eval_on_selector_all('a[href]', "els => els.map(a => ({text:(a.innerText||a.textContent||'').trim(), href:a.href}))")
+                  (OUT/'anchors.json').write_text(json.dumps(anchors, indent=2, ensure_ascii=False), encoding='utf-8')
+
+                  candidates = []
+                  seen = set()
+                  keywords = ('team', 'prediction', 'pitwall', 'pit wall', 'manage')
+                  for a in anchors:
+                      text = (a.get('text') or '').lower()
+                      href = a.get('href') or ''
+                      if any(k in text or k.replace(' ','') in href.lower().replace('-','').replace('_','') for k in keywords):
+                          if href.startswith('https://fantasygp.com') and href not in seen:
+                              seen.add(href); candidates.append(href)
+                  guesses = [
+                      'https://fantasygp.com/team/',
+                      'https://fantasygp.com/my-team/',
+                      'https://fantasygp.com/team-management/',
+                      'https://fantasygp.com/predictions/',
+                      'https://fantasygp.com/grand-prix-predictions/',
+                      'https://fantasygp.com/pitwall/',
+                      'https://fantasygp.com/pit-wall/',
+                  ]
+                  for u in guesses:
+                      if u not in seen:
+                          seen.add(u); candidates.append(u)
+
+                  results=[]
+                  for i,u in enumerate(candidates[:20]):
+                      try:
+                          resp = await page.goto(u, wait_until='domcontentloaded', timeout=45000)
+                          await page.wait_for_timeout(2500)
+                          title = await page.title()
+                          body = (await page.locator('body').inner_text())[:30000]
+                          headings = await page.eval_on_selector_all('h1,h2,h3,h4', "els => els.map(e => (e.innerText||'').trim()).filter(Boolean)")
+                          login_visible = await page.locator("input[type='password']:visible").count() > 0
+                          rec={'url':u,'final_url':page.url,'status': resp.status if resp else None,'title':title,'headings':headings,'login_visible':login_visible,'body':body}
+                          results.append(rec)
+                          safe = re.sub(r'[^a-zA-Z0-9]+','_',urlparse(page.url).path.strip('/') or 'home')[:60]
+                          (OUT/f'{i:02d}_{safe}.txt').write_text(body, encoding='utf-8')
+                          await page.screenshot(path=str(OUT/f'{i:02d}_{safe}.png'), full_page=True)
+                      except Exception as e:
+                          results.append({'url':u,'error':f'{type(e).__name__}: {e}'})
+                  payload={'auth':auth,'candidates':candidates,'results':results}
+                  (OUT/'account-pages.json').write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding='utf-8')
+                  await browser.close()
+
+          asyncio.run(main())
+          PY
+      - name: Upload read-only probe
+        uses: actions/upload-artifact@v6
+        with:
+          name: fantasygp-account-probe
+          path: build/account-probe/
+          retention-days: 1
