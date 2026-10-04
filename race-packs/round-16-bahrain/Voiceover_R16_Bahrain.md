@@ -1,4 +1,4 @@
-# SAVI F1 League | Round 16 Bahrain voice-over
+# SAVVY F1 League | Round 16 Bahrain voice-over
 
 Round 16 took Formula 1 back to Sepang for the Bahrain Grand Prix in Malaysia, and the weather turned the race upside down. Heavy rain delayed the start, the field split between intermediates and slicks, and Max Verstappen had to recover after both Mercedes cars beat him into Turn One. Verstappen worked his way back to the front for his first win of the season, Kimi Antonelli finished second, and Lewis Hamilton recovered from an early tyre gamble to take third. George Russell retired late, leaving Antonelli 84 points clear in the Formula 1 championship.
 
