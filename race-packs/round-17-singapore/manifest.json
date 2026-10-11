@@ -1,0 +1,26 @@
+{
+  "round": 17,
+  "race": "Singapore",
+  "slug": "singapore",
+  "files": {
+    "F1_Season2_Cumulative_R17_Singapore_GRAPH_FIXED.csv": "e79297cad21ed9401810cdc1ea75a1c038229a33cd570d5894008b4e27471968",
+    "F1_Season2_Individual_R17_Singapore.csv": "6f6cb54cf8cee8657090d8cf55479fb4f03effd556b0c6dd23b1dd5f793eb4ad",
+    "QC_REPORT.md": "d4a55d68ad168221332caef104885056c1dd98ed18ab2d5ea99f97c77eb40450",
+    "README.md": "c29a60d594edf266a2c228a026175fb16ff48ee8df7c0dac5801e2a63baf987e",
+    "SAVI_League_R17_Singapore_Top10.png": "3ee918fd5add63223ad5ce03c6bfe392b96b0e0ffd4a6591d651b241d523c19a",
+    "Teams_Update.html": "3e3a7c2b6057418f4ec726a9ad04d9d611efc17a72db5a5a2e43ea1d6872dc97",
+    "Teams_Update.txt": "8cbbbc14b0e584646358547059db8f7729071a9701a57048632d5bf1f74b21d3",
+    "Voiceover_R17_Singapore.md": "256360ccfe50fd78a9ddce9bdb683a81f19905eb669e73a744e7027b20276399",
+    "Work_Channel_Update_R17_Singapore.md": "5b37b1fbc45b503ce9c1c3047f11e8b5c406e756486c78ca2d940e6e4426e071",
+    "fantasygp-captures/fantasygp-row-capture.json": "695e2ab913043e7ea85a57118526692eef97a3bd725c9d75ebd99df4a7e9bf9b",
+    "fantasygp-captures/overall-page-1.png": "4606f62b6d50fb414ab6efa67bbf6625c3f1a45eb541f59a07392a01b93a0e08",
+    "fantasygp-captures/overall-page-2.png": "3419658fa8d85eee30032db1e226a5d5062ebf06a21c347bb6c1ba0452864662",
+    "fantasygp-captures/race-page-1.png": "2406c387be9e9cc2cf81ce719926e5c143afb566dd362cb90fdbed2cb7677480",
+    "fantasygp-captures/race-page-2.png": "49315bbc01914920f6cda50875d03770723da4982b325b6691508e00280eb266",
+    "latest_adjustments.csv": "731a1531d21278de0f4013e57ae852349c803cd95dcbb831ded3b22e191ed21d",
+    "overall_top_10.csv": "d4aed1b51b54a6919b73d7f8001ab81dc9d5de9680bde39258f1c64a9ce7c802",
+    "race_data.json": "93116db15a55e3c4b8d3f1bef85f230b8e96a729645d7e995a20b52e48e1e1ff",
+    "race_top_10.csv": "8b56ba8e7dc371b343e846d2b6e76dd822639277b4245a14ef5361bc340af864",
+    "update-summary.json": "5295c81095237d4d2d49dc1ff903aae58e23e3a76c51b6dc2755a6c0c726d680"
+  }
+}
