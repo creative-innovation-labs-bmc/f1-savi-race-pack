@@ -1,0 +1,27 @@
+{
+  "round": 18,
+  "race": "USA",
+  "slug": "usa",
+  "files": {
+    "F1_SAVI_R18_USA_Complete_Pack.zip": "c06513c6a380e6b557b14f80006b39aa262d3978c9bfd8e8dde1a2725f84d6a7",
+    "F1_Season2_Cumulative_R18_USA_GRAPH_FIXED.csv": "4f386adf21dda3338bfaca0ad6b50136f7edffca7ca9322fa3da28820c6e2a03",
+    "F1_Season2_Individual_R18_USA.csv": "f1fd68ca6471ba77d3df34f4666076531aac1827eb6fa7afa369a88c3b650607",
+    "QC_REPORT.md": "d4776cccaf6d8003b79d572543ff67af5614d36cbd8aa57bc46dd46deec9c7d2",
+    "README.md": "7df4ebd5b3ae7454f3f5ee188788489201fff242e3f8038fb79ff05dca65898a",
+    "SAVI_League_R18_USA_Top10.png": "af53c24def8032b1c95cefb24684e33dc198112f3c62cec82ac0698c96195d7f",
+    "Teams_Update.html": "61640ea956a5be36d82ad4c8881e06ea8122384f152c7e936cf31e2eecb45d9c",
+    "Teams_Update.txt": "bedf97b83b0059023ab217ff501a697062e67b1efb8c61a94eacb6804fa6c612",
+    "Voiceover_R18_USA.md": "f15856e8fdd5efc892803b98d2b588c40f1cd9341aa1161c5488b8f710db53a5",
+    "Work_Channel_Update_R18_USA.md": "f7d564abbdb0bc01dd405e7b23b1b8cf3f1f537314c2b1d32cb04a9b0b27f8bb",
+    "fantasygp-captures/fantasygp-row-capture.json": "30bdddc8e84d5ff2ab8efef5556a7f65856e6700e57e10a11b0af8be35910e9e",
+    "fantasygp-captures/overall-page-1.png": "43570879097842b295a29b45765329b2c0017523b397283973cd0332a1c022f8",
+    "fantasygp-captures/overall-page-2.png": "270d4f23d03377c22e1e323dfd0aa6c2c8e7b1a0e86ebaa1eae9c43756a70d06",
+    "fantasygp-captures/race-page-1.png": "bf7358acb0f69d9df86f264633c8de5fcba535b949d5b76318ca381b2e753de0",
+    "fantasygp-captures/race-page-2.png": "51467d3be7d5b896ec53b75043e5eeeb8cce2550e1dc8523a245e8cd685f4c20",
+    "latest_adjustments.csv": "eaa8d202da478572142751a6b94b55ee26737abf07b755458b533484f03f25ef",
+    "overall_top_10.csv": "271f8bd54921865fd3955ae036d258d0c4f397625ed95f8e10375f7dca1af3c8",
+    "race_data.json": "9706cc1f16e45e12d9943841d099e993b252783642b228b7101ffea2f075ed0f",
+    "race_top_10.csv": "99e9da7b413f013a428d74c4e77b2592c7794c4fdaf21f96593273b7fcbfab51",
+    "update-summary.json": "2a16df3f2f6f0112e96551897f44de4a17587b5cc9bb801e7fc859b031aef26b"
+  }
+}
