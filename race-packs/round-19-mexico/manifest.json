@@ -1,0 +1,27 @@
+{
+  "round": 19,
+  "race": "Mexico",
+  "slug": "mexico",
+  "files": {
+    "F1_SAVI_R19_Mexico_Complete_Pack.zip": "cc4543d6e5c06b90c5539a5b7e0c32b5f9666d6451e9dcffea49a4b9fec48362",
+    "F1_Season2_Cumulative_R19_Mexico_GRAPH_FIXED.csv": "17e0b0e1b8b0c1b2948e3def3f4bf5d0ee17f3d4bd4c46e071579b2d21d91e38",
+    "F1_Season2_Individual_R19_Mexico.csv": "d772c31a5440c3f9f9d3f45c57237c11ad7fa93ed965aac890e91afe34f07dc5",
+    "QC_REPORT.md": "6c0a7e38a2f4a8d96347da9553558a82227a1743a6394b5a0fbb72642ecc9fd1",
+    "README.md": "4118aac812de95fdcd5e63ebed4630f34a67802c8a87ec1500e61714bf19378f",
+    "SAVI_League_R19_Mexico_Top10.png": "1feaf20244b26c376452de9bc62bbb3013b49f446e93f2109ebc70f32606b2b2",
+    "Teams_Update.html": "3713f72aa17ee733f4e79b487c25667ad2b9d61d861d0293aee61a60529f601e",
+    "Teams_Update.txt": "0007d6e4077ec6be244d2316a8106678f90f46737a2fa8a18bd3bd6424777137",
+    "Voiceover_R19_Mexico.md": "6996da499068d7a784357814e3485986cb46af601c50142ec048565f3eec9cbe",
+    "Work_Channel_Update_R19_Mexico.md": "c04b418d84e5f745582b1f2834991dca1702975124c3e330ad7918c24d7d7464",
+    "fantasygp-captures/fantasygp-row-capture.json": "9cdcd1a3ef76d26d7694de3a77d77210e8ed61c0a10f29846e265403fe5a1bd1",
+    "fantasygp-captures/overall-page-1.png": "6006a253743622109d335088bcd8ba50ddcea1bef5e43d652f82db3371950482",
+    "fantasygp-captures/overall-page-2.png": "6fb4826a5a4b50ab65dd5ac7a164b8c640e8660cf07b5cb71c17cea01c4394fe",
+    "fantasygp-captures/race-page-1.png": "7963ce9155e59db2a746ac8211f86e12c70c5a05109c744e656d6d9ce36ef8e0",
+    "fantasygp-captures/race-page-2.png": "1b98432830146bb49d3343f8a6b70a4f54e8ee1fbe9f82a85d7d23ddfafa7d68",
+    "latest_adjustments.csv": "731a1531d21278de0f4013e57ae852349c803cd95dcbb831ded3b22e191ed21d",
+    "overall_top_10.csv": "ef6f2047ac63b842e153197c328968d8e55b963a3e3bd53d2708a65038f5213b",
+    "race_data.json": "17a61c904f232abb9056a13355f2badd6f0ec5c48c530dddf7cd23eea55c27d9",
+    "race_top_10.csv": "8c1f84e40a191fd66a709883438154dd77fcb8f7e0348a37646d4908dd39165e",
+    "update-summary.json": "00a8505242a54553cd20616f027d0a47edbf0d1d435a186203c1de7e922160c7"
+  }
+}

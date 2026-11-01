@@ -1,0 +1,572 @@
+{
+  "league": "SAVI F1",
+  "league_id": 10527,
+  "race": "Mexico",
+  "round": 19,
+  "total_entries": 46,
+  "captured_at": "2026-11-02T10:29:00+11:00",
+  "race_pages": [
+    [
+      [
+        "1",
+        "Renault F1",
+        "PJF1",
+        169
+      ],
+      [
+        "2",
+        "Snoopy",
+        "JR10044",
+        162
+      ],
+      [
+        "3",
+        "We are the competition",
+        "lou-mih",
+        156
+      ],
+      [
+        "3",
+        "HHHHHH",
+        "harves",
+        156
+      ],
+      [
+        "5",
+        "Buzzin with Eddie",
+        "Alan Thomas",
+        140
+      ],
+      [
+        "6",
+        "Save The Engine",
+        "RichardS",
+        132
+      ],
+      [
+        "7",
+        "Blue Flag Racing",
+        "pgmotts",
+        129
+      ],
+      [
+        "8",
+        "Murrays Mayhem",
+        "Martin West",
+        123
+      ],
+      [
+        "8",
+        "Maximum Points",
+        "Max Cutter",
+        123
+      ],
+      [
+        "8",
+        "Petch Racing",
+        "Christiaan",
+        123
+      ],
+      [
+        "11",
+        "Magraith Motorsport",
+        "Matt Magraith",
+        119
+      ],
+      [
+        "12",
+        "Ferrari strategy department",
+        "Goodie",
+        118
+      ],
+      [
+        "13",
+        "No Michael no",
+        "michael_sideris",
+        117
+      ],
+      [
+        "14",
+        "Ibis2026",
+        "Pri Kumar",
+        116
+      ],
+      [
+        "14",
+        "WeeWums",
+        "Ham_27",
+        116
+      ],
+      [
+        "16",
+        "Feeling Bullish",
+        "Devmal",
+        115
+      ],
+      [
+        "16",
+        "AloeVira",
+        "AloeVira",
+        115
+      ],
+      [
+        "18",
+        "Box Box Box",
+        "fooch",
+        112
+      ],
+      [
+        "19",
+        "CrashBangWallop",
+        "Simon Rogerson",
+        109
+      ],
+      [
+        "19",
+        "Team Caterham",
+        "Adrian Jenkins",
+        109
+      ],
+      [
+        "19",
+        "joyride",
+        "joydelacruz",
+        109
+      ],
+      [
+        "22",
+        "Machined Wheel Nut",
+        "Jean Alesi",
+        108
+      ],
+      [
+        "22",
+        "Bravo Fernando",
+        "Adolfo Fernández Benito",
+        108
+      ],
+      [
+        "22",
+        "ALMOCO",
+        "Scorched Almond",
+        108
+      ],
+      [
+        "22",
+        "vansF1",
+        "Andries",
+        108
+      ]
+    ],
+    [
+      [
+        "26",
+        "Howdy Audi",
+        "Pete M",
+        104
+      ],
+      [
+        "26",
+        "Need More Speed",
+        "Tanuja West",
+        104
+      ],
+      [
+        "28",
+        "Strolling to Last Place",
+        "dmack",
+        103
+      ],
+      [
+        "28",
+        "Nord Racing",
+        "ariel_h",
+        103
+      ],
+      [
+        "30",
+        "Watts Up Racing",
+        "NellieWhiteside",
+        102
+      ],
+      [
+        "31",
+        "The Vans",
+        "Jon Evans",
+        100
+      ],
+      [
+        "32",
+        "lance strolls brake pedal",
+        "daniellecheng",
+        96
+      ],
+      [
+        "32",
+        "Doohanok",
+        "garettann",
+        96
+      ],
+      [
+        "34",
+        "Give me the drink",
+        "Zeke",
+        93
+      ],
+      [
+        "35",
+        "Just an Inchident",
+        "CharlotteWareham",
+        92
+      ],
+      [
+        "35",
+        "I thought this was Mario Kart",
+        "sl",
+        92
+      ],
+      [
+        "37",
+        "Double Parked",
+        "Patrick Maraun",
+        90
+      ],
+      [
+        "38",
+        "Piastronimical Speedy",
+        "Chelsea Innes",
+        81
+      ],
+      [
+        "39",
+        "Car Go Vroom Vroom Super Fast",
+        "Emily Tantau",
+        80
+      ],
+      [
+        "40",
+        "AureConstructors Championship",
+        "Corey McDonald",
+        77
+      ],
+      [
+        "41",
+        "QuantumSpeed",
+        "redflag",
+        76
+      ],
+      [
+        "42",
+        "Piastroying The Grid",
+        "BOS",
+        75
+      ],
+      [
+        "43",
+        "Octopus Ross",
+        "deciMal_oNion",
+        74
+      ],
+      [
+        "44",
+        "No Mikey No",
+        "Kevin de Silva",
+        73
+      ],
+      [
+        "45",
+        "bubblegun",
+        "Ruan01",
+        70
+      ],
+      [
+        "46",
+        "Fernando is faster than you",
+        "AdrianoRS",
+        0
+      ]
+    ]
+  ],
+  "overall_pages": [
+    [
+      [
+        "1",
+        "We are the competition",
+        "lou-mih",
+        3548
+      ],
+      [
+        "2",
+        "Maximum Points",
+        "Max Cutter",
+        3512
+      ],
+      [
+        "3",
+        "Snoopy",
+        "JR10044",
+        3464
+      ],
+      [
+        "4",
+        "Renault F1",
+        "PJF1",
+        3289
+      ],
+      [
+        "5",
+        "AloeVira",
+        "AloeVira",
+        3264
+      ],
+      [
+        "6",
+        "Box Box Box",
+        "fooch",
+        3252
+      ],
+      [
+        "7",
+        "Blue Flag Racing",
+        "pgmotts",
+        3213
+      ],
+      [
+        "8",
+        "Magraith Motorsport",
+        "Matt Magraith",
+        3143
+      ],
+      [
+        "9",
+        "HHHHHH",
+        "harves",
+        3110
+      ],
+      [
+        "10",
+        "Team Caterham",
+        "Adrian Jenkins",
+        3069
+      ],
+      [
+        "11",
+        "Bravo Fernando",
+        "Adolfo Fernández Benito",
+        3060
+      ],
+      [
+        "12",
+        "CrashBangWallop",
+        "Simon Rogerson",
+        3037
+      ],
+      [
+        "13",
+        "No Michael no",
+        "michael_sideris",
+        3022
+      ],
+      [
+        "14",
+        "Save The Engine",
+        "RichardS",
+        3011
+      ],
+      [
+        "15",
+        "Howdy Audi",
+        "Pete M",
+        3002
+      ],
+      [
+        "16",
+        "Need More Speed",
+        "Tanuja West",
+        2982
+      ],
+      [
+        "17",
+        "The Vans",
+        "Jon Evans",
+        2970
+      ],
+      [
+        "18",
+        "Ferrari strategy department",
+        "Goodie",
+        2940
+      ],
+      [
+        "19",
+        "WeeWums",
+        "Ham_27",
+        2900
+      ],
+      [
+        "20",
+        "Murrays Mayhem",
+        "Martin West",
+        2838
+      ],
+      [
+        "21",
+        "vansF1",
+        "Andries",
+        2784
+      ],
+      [
+        "22",
+        "lance strolls brake pedal",
+        "daniellecheng",
+        2768
+      ],
+      [
+        "23",
+        "Double Parked",
+        "Patrick Maraun",
+        2723
+      ],
+      [
+        "24",
+        "Strolling to Last Place",
+        "dmack",
+        2719
+      ],
+      [
+        "25",
+        "Machined Wheel Nut",
+        "Jean Alesi",
+        2694
+      ]
+    ],
+    [
+      [
+        "26",
+        "Just an Inchident",
+        "CharlotteWareham",
+        2659
+      ],
+      [
+        "27",
+        "Petch Racing",
+        "Christiaan",
+        2639
+      ],
+      [
+        "28",
+        "joyride",
+        "joydelacruz",
+        2638
+      ],
+      [
+        "29",
+        "Give me the drink",
+        "Zeke",
+        2616
+      ],
+      [
+        "30",
+        "bubblegun",
+        "Ruan01",
+        2506
+      ],
+      [
+        "31",
+        "Ibis2026",
+        "Pri Kumar",
+        2504
+      ],
+      [
+        "32",
+        "Watts Up Racing",
+        "NellieWhiteside",
+        2490
+      ],
+      [
+        "33",
+        "I thought this was Mario Kart",
+        "sl",
+        2450
+      ],
+      [
+        "34",
+        "Doohanok",
+        "garettann",
+        2399
+      ],
+      [
+        "35",
+        "Buzzin with Eddie",
+        "Alan Thomas",
+        2396
+      ],
+      [
+        "36",
+        "Nord Racing",
+        "ariel_h",
+        2365
+      ],
+      [
+        "37",
+        "No Mikey No",
+        "Kevin de Silva",
+        2325
+      ],
+      [
+        "38",
+        "AureConstructors Championship",
+        "Corey McDonald",
+        2308
+      ],
+      [
+        "39",
+        "QuantumSpeed",
+        "redflag",
+        2277
+      ],
+      [
+        "40",
+        "Piastroying The Grid",
+        "BOS",
+        2187
+      ],
+      [
+        "41",
+        "Feeling Bullish",
+        "Devmal",
+        2150
+      ],
+      [
+        "42",
+        "Car Go Vroom Vroom Super Fast",
+        "Emily Tantau",
+        1973
+      ],
+      [
+        "43",
+        "Octopus Ross",
+        "deciMal_oNion",
+        1882
+      ],
+      [
+        "44",
+        "ALMOCO",
+        "Scorched Almond",
+        1833
+      ],
+      [
+        "45",
+        "Piastronimical Speedy",
+        "Chelsea Innes",
+        1802
+      ],
+      [
+        "46",
+        "Fernando is faster than you",
+        "AdrianoRS",
+        0
+      ]
+    ]
+  ]
+}
