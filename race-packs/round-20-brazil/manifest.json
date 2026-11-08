@@ -1,0 +1,30 @@
+{
+  "round": 20,
+  "race": "Brazil",
+  "competitors": 46,
+  "status": "pass",
+  "files": {
+    "F1_Season2_Cumulative_R20_Brazil_GRAPH_FIXED.csv": "bfa42279b2283e581efc04882540ad97173e6a2842c655820fb29c8947a3fecb",
+    "F1_Season2_Individual_R20_Brazil.csv": "d817d997110ffa3010a0208a84e1a5c78bfecc9278f46e083199963cddf7c3f5",
+    "QC_REPORT.md": "dfd58b30b168c2aba97fa3ecaa1b4b590e540fa0d9c05416f7698632e135e92a",
+    "README.md": "9c72f47ec1a66b7331e68971410cd099fcf67191da68e353ebf0fe5b24f721dc",
+    "SAVI_League_R20_Brazil_Top10.png": "d2c94728df162d9bea31cb7ac563ee2421e3b5080dab71daa6b066ea2d12a0a5",
+    "Teams_Update.html": "06d81a2ea64e70c8fe24939eb6b668f5cba1368cdab5fa745528a6b7088aec72",
+    "Teams_Update.txt": "c9250c3e9df9efa734bbcbd4f1d3851ba2cb7c30bcda166f64e08cad1754f032",
+    "Voiceover_R20_Brazil.md": "e5b6e73e8fb469a36bc3d395c1cdfa5650beb6c293c05fe3f4333fa9e396a5ba",
+    "Work_Channel_Update_R20_Brazil.md": "99c96190cc444c04f0e9a5b958346deee0ae526af0af6ece8c16b78a4d5b003b",
+    "fantasygp-captures/fantasygp-row-capture.json": "39e3a039d016efeef054ea94e47a9959ec60ea62fe28c12a397a4360a85487d6",
+    "fantasygp-captures/overall-page-1.png": "ecdb0a7cee060d5a20d45e3cd32a01b0dc70cb158bd201b347f7dad78ba93d4c",
+    "fantasygp-captures/overall-page-2.png": "3b83a80c82f095cc552a8f8241b6c113bd5fdc12e53314d0091f52a89b20a9e2",
+    "fantasygp-captures/prior-race-page-1.png": "d941f964a745e66a435705931648510cacbdf8f1ef0ab2fcd7b8ab4e3696b9b7",
+    "fantasygp-captures/prior-race-page-2.png": "b78a638e9b69ba2f789498984a0c50a219507199868866e33f2cb30ade14e3f7",
+    "fantasygp-captures/race-page-1.png": "59008e922cfafa7c37dfc7bb8988d97ee01367a9470c93d1c5d47ec82174c12b",
+    "fantasygp-captures/race-page-2.png": "a080f86e795f1f528600aa6371ecf484a1fdfa4999d45f29208289c7216d42a5",
+    "fantasygp-movements.json": "2a2e846ae22975ca3849ea36d6b1bb6423cf9e74a4ebd742e719a9a8152fe71d",
+    "latest_adjustments.csv": "731a1531d21278de0f4013e57ae852349c803cd95dcbb831ded3b22e191ed21d",
+    "overall_top_10.csv": "e9fe20e30bf92f7cf361fc8ec7484f51409046eb90810051235b52191af8b68f",
+    "race_data.json": "0e8efe55cff25dea9e0945d00f25de32a228ce492565600e3c616d960550a0af",
+    "race_top_10.csv": "2bbf73e54bcf506a0782e44244781b6aed5aa020e2a37dd6ab6457ecbe5a21cc",
+    "update-summary.json": "049d999e679f1bfd09083fd21281c1ef72557a01f820db967f0a0e77625845be"
+  }
+}

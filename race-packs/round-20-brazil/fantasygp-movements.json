@@ -1,0 +1,416 @@
+[
+  {
+    "rank": 1,
+    "previous_rank": 1,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "We are the competition",
+    "manager": "lou-mih",
+    "points": 3717
+  },
+  {
+    "rank": 2,
+    "previous_rank": 2,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Maximum Points",
+    "manager": "Max Cutter",
+    "points": 3666
+  },
+  {
+    "rank": 3,
+    "previous_rank": 3,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Snoopy",
+    "manager": "JR10044",
+    "points": 3579
+  },
+  {
+    "rank": 4,
+    "previous_rank": 4,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Renault F1",
+    "manager": "PJF1",
+    "points": 3465
+  },
+  {
+    "rank": 5,
+    "previous_rank": 5,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "AloeVira",
+    "manager": "AloeVira",
+    "points": 3401
+  },
+  {
+    "rank": 6,
+    "previous_rank": 6,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Box Box Box",
+    "manager": "fooch",
+    "points": 3361
+  },
+  {
+    "rank": 7,
+    "previous_rank": 7,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Blue Flag Racing",
+    "manager": "pgmotts",
+    "points": 3355
+  },
+  {
+    "rank": 8,
+    "previous_rank": 8,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Magraith Motorsport",
+    "manager": "Matt Magraith",
+    "points": 3262
+  },
+  {
+    "rank": 9,
+    "previous_rank": 9,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "HHHHHH",
+    "manager": "harves",
+    "points": 3248
+  },
+  {
+    "rank": 10,
+    "previous_rank": 11,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Bravo Fernando",
+    "manager": "Adolfo Fernández Benito",
+    "points": 3186
+  },
+  {
+    "rank": 11,
+    "previous_rank": 12,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "CrashBangWallop",
+    "manager": "Simon Rogerson",
+    "points": 3166
+  },
+  {
+    "rank": 12,
+    "previous_rank": 10,
+    "movement": -2,
+    "movement_symbol": "-2",
+    "team": "Team Caterham",
+    "manager": "Adrian Jenkins",
+    "points": 3163
+  },
+  {
+    "rank": 13,
+    "previous_rank": 15,
+    "movement": 2,
+    "movement_symbol": "+2",
+    "team": "Save The Engine",
+    "manager": "RichardS",
+    "points": 3159
+  },
+  {
+    "rank": 14,
+    "previous_rank": 13,
+    "movement": -1,
+    "movement_symbol": "-1",
+    "team": "No Michael no",
+    "manager": "michael_sideris",
+    "points": 3136
+  },
+  {
+    "rank": 15,
+    "previous_rank": 16,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Need More Speed",
+    "manager": "Tanuja West",
+    "points": 3118
+  },
+  {
+    "rank": 16,
+    "previous_rank": 14,
+    "movement": -2,
+    "movement_symbol": "-2",
+    "team": "Howdy Audi",
+    "manager": "Pete M",
+    "points": 3112
+  },
+  {
+    "rank": 17,
+    "previous_rank": 17,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "The Vans",
+    "manager": "Jon Evans",
+    "points": 3112
+  },
+  {
+    "rank": 18,
+    "previous_rank": 18,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Ferrari strategy department",
+    "manager": "Goodie",
+    "points": 3056
+  },
+  {
+    "rank": 19,
+    "previous_rank": 19,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "WeeWums",
+    "manager": "Ham_27",
+    "points": 3016
+  },
+  {
+    "rank": 20,
+    "previous_rank": 20,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Murrays Mayhem",
+    "manager": "Martin West",
+    "points": 2991
+  },
+  {
+    "rank": 21,
+    "previous_rank": 21,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "vansF1",
+    "manager": "Andries",
+    "points": 2897
+  },
+  {
+    "rank": 22,
+    "previous_rank": 22,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "lance strolls brake pedal",
+    "manager": "daniellecheng",
+    "points": 2844
+  },
+  {
+    "rank": 23,
+    "previous_rank": 23,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Double Parked",
+    "manager": "Patrick Maraun",
+    "points": 2834
+  },
+  {
+    "rank": 24,
+    "previous_rank": 25,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Machined Wheel Nut",
+    "manager": "Jean Alesi",
+    "points": 2833
+  },
+  {
+    "rank": 25,
+    "previous_rank": 24,
+    "movement": -1,
+    "movement_symbol": "-1",
+    "team": "Strolling to Last Place",
+    "manager": "dmack",
+    "points": 2825
+  },
+  {
+    "rank": 26,
+    "previous_rank": 26,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Petch Racing",
+    "manager": "Christiaan",
+    "points": 2805
+  },
+  {
+    "rank": 27,
+    "previous_rank": 28,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "joyride",
+    "manager": "joydelacruz",
+    "points": 2742
+  },
+  {
+    "rank": 28,
+    "previous_rank": 29,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Give me the drink",
+    "manager": "Zeke",
+    "points": 2740
+  },
+  {
+    "rank": 29,
+    "previous_rank": 27,
+    "movement": -2,
+    "movement_symbol": "-2",
+    "team": "Just an Inchident",
+    "manager": "CharlotteWareham",
+    "points": 2732
+  },
+  {
+    "rank": 30,
+    "previous_rank": 31,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Ibis2026",
+    "manager": "Pri Kumar",
+    "points": 2623
+  },
+  {
+    "rank": 31,
+    "previous_rank": 30,
+    "movement": -1,
+    "movement_symbol": "-1",
+    "team": "bubblegun",
+    "manager": "Ruan01",
+    "points": 2603
+  },
+  {
+    "rank": 32,
+    "previous_rank": 32,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Watts Up Racing",
+    "manager": "NellieWhiteside",
+    "points": 2549
+  },
+  {
+    "rank": 33,
+    "previous_rank": 33,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "I thought this was Mario Kart",
+    "manager": "sl",
+    "points": 2535
+  },
+  {
+    "rank": 34,
+    "previous_rank": 35,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Nord Racing",
+    "manager": "ariel_h",
+    "points": 2523
+  },
+  {
+    "rank": 35,
+    "previous_rank": 36,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Doohanok",
+    "manager": "garettann",
+    "points": 2488
+  },
+  {
+    "rank": 36,
+    "previous_rank": 34,
+    "movement": -2,
+    "movement_symbol": "-2",
+    "team": "Buzzin with Eddie",
+    "manager": "Alan Thomas",
+    "points": 2482
+  },
+  {
+    "rank": 37,
+    "previous_rank": 37,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "No Mikey No",
+    "manager": "Kevin de Silva",
+    "points": 2443
+  },
+  {
+    "rank": 38,
+    "previous_rank": 38,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "AureConstructors Championship",
+    "manager": "Corey McDonald",
+    "points": 2442
+  },
+  {
+    "rank": 39,
+    "previous_rank": 39,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "QuantumSpeed",
+    "manager": "redflag",
+    "points": 2394
+  },
+  {
+    "rank": 40,
+    "previous_rank": 41,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "Feeling Bullish",
+    "manager": "Devmal",
+    "points": 2344
+  },
+  {
+    "rank": 41,
+    "previous_rank": 40,
+    "movement": -1,
+    "movement_symbol": "-1",
+    "team": "Piastroying The Grid",
+    "manager": "BOS",
+    "points": 2251
+  },
+  {
+    "rank": 42,
+    "previous_rank": 42,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Car Go Vroom Vroom Super Fast",
+    "manager": "Emily Tantau",
+    "points": 2060
+  },
+  {
+    "rank": 43,
+    "previous_rank": 43,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Octopus Ross",
+    "manager": "deciMal_oNion",
+    "points": 1929
+  },
+  {
+    "rank": 44,
+    "previous_rank": 45,
+    "movement": 1,
+    "movement_symbol": "+1",
+    "team": "ALMOCO",
+    "manager": "Scorched Almond",
+    "points": 1904
+  },
+  {
+    "rank": 45,
+    "previous_rank": 44,
+    "movement": -1,
+    "movement_symbol": "-1",
+    "team": "Piastronimical Speedy",
+    "manager": "Chelsea Innes",
+    "points": 1890
+  },
+  {
+    "rank": 46,
+    "previous_rank": 46,
+    "movement": 0,
+    "movement_symbol": "=",
+    "team": "Fernando is faster than you",
+    "manager": "AdrianoRS",
+    "points": 0
+  }
+]

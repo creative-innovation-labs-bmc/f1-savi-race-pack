@@ -1,0 +1,379 @@
+{
+  "status": "pass",
+  "source": "FantasyGP authenticated two-page capture",
+  "latest_completed_round": 20,
+  "latest_completed_race": "Brazil",
+  "overall_pages": 2,
+  "race_pages": 2,
+  "competitors": 46,
+  "mexico_corrections": [
+    {
+      "manager": "lou-mih",
+      "team": "We are the competition",
+      "old_mexico_score": 156,
+      "corrected_mexico_score": 163,
+      "old_mexico_total": 3548,
+      "corrected_mexico_total": 3555
+    },
+    {
+      "manager": "Max Cutter",
+      "team": "Maximum Points",
+      "old_mexico_score": 123,
+      "corrected_mexico_score": 124,
+      "old_mexico_total": 3512,
+      "corrected_mexico_total": 3513
+    },
+    {
+      "manager": "JR10044",
+      "team": "Snoopy",
+      "old_mexico_score": 162,
+      "corrected_mexico_score": 144,
+      "old_mexico_total": 3464,
+      "corrected_mexico_total": 3446
+    },
+    {
+      "manager": "PJF1",
+      "team": "Renault F1",
+      "old_mexico_score": 169,
+      "corrected_mexico_score": 184,
+      "old_mexico_total": 3289,
+      "corrected_mexico_total": 3304
+    },
+    {
+      "manager": "AloeVira",
+      "team": "AloeVira",
+      "old_mexico_score": 115,
+      "corrected_mexico_score": 120,
+      "old_mexico_total": 3264,
+      "corrected_mexico_total": 3269
+    },
+    {
+      "manager": "fooch",
+      "team": "Box Box Box",
+      "old_mexico_score": 112,
+      "corrected_mexico_score": 92,
+      "old_mexico_total": 3252,
+      "corrected_mexico_total": 3232
+    },
+    {
+      "manager": "pgmotts",
+      "team": "Blue Flag Racing",
+      "old_mexico_score": 129,
+      "corrected_mexico_score": 125,
+      "old_mexico_total": 3213,
+      "corrected_mexico_total": 3209
+    },
+    {
+      "manager": "Matt Magraith",
+      "team": "Magraith Motorsport",
+      "old_mexico_score": 119,
+      "corrected_mexico_score": 116,
+      "old_mexico_total": 3143,
+      "corrected_mexico_total": 3140
+    },
+    {
+      "manager": "harves",
+      "team": "HHHHHH",
+      "old_mexico_score": 156,
+      "corrected_mexico_score": 177,
+      "old_mexico_total": 3110,
+      "corrected_mexico_total": 3131
+    },
+    {
+      "manager": "Adolfo Fernández Benito",
+      "team": "Bravo Fernando",
+      "old_mexico_score": 108,
+      "corrected_mexico_score": 106,
+      "old_mexico_total": 3060,
+      "corrected_mexico_total": 3058
+    },
+    {
+      "manager": "Simon Rogerson",
+      "team": "CrashBangWallop",
+      "old_mexico_score": 109,
+      "corrected_mexico_score": 121,
+      "old_mexico_total": 3037,
+      "corrected_mexico_total": 3049
+    },
+    {
+      "manager": "Adrian Jenkins",
+      "team": "Team Caterham",
+      "old_mexico_score": 109,
+      "corrected_mexico_score": 105,
+      "old_mexico_total": 3069,
+      "corrected_mexico_total": 3065
+    },
+    {
+      "manager": "RichardS",
+      "team": "Save The Engine",
+      "old_mexico_score": 132,
+      "corrected_mexico_score": 129,
+      "old_mexico_total": 3011,
+      "corrected_mexico_total": 3008
+    },
+    {
+      "manager": "michael_sideris",
+      "team": "No Michael no",
+      "old_mexico_score": 117,
+      "corrected_mexico_score": 121,
+      "old_mexico_total": 3022,
+      "corrected_mexico_total": 3026
+    },
+    {
+      "manager": "Tanuja West",
+      "team": "Need More Speed",
+      "old_mexico_score": 104,
+      "corrected_mexico_score": 111,
+      "old_mexico_total": 2982,
+      "corrected_mexico_total": 2989
+    },
+    {
+      "manager": "Pete M",
+      "team": "Howdy Audi",
+      "old_mexico_score": 104,
+      "corrected_mexico_score": 110,
+      "old_mexico_total": 3002,
+      "corrected_mexico_total": 3008
+    },
+    {
+      "manager": "Jon Evans",
+      "team": "The Vans",
+      "old_mexico_score": 100,
+      "corrected_mexico_score": 106,
+      "old_mexico_total": 2970,
+      "corrected_mexico_total": 2976
+    },
+    {
+      "manager": "Goodie",
+      "team": "Ferrari strategy department",
+      "old_mexico_score": 118,
+      "corrected_mexico_score": 128,
+      "old_mexico_total": 2940,
+      "corrected_mexico_total": 2950
+    },
+    {
+      "manager": "Ham_27",
+      "team": "WeeWums",
+      "old_mexico_score": 116,
+      "corrected_mexico_score": 123,
+      "old_mexico_total": 2900,
+      "corrected_mexico_total": 2907
+    },
+    {
+      "manager": "Martin West",
+      "team": "Murrays Mayhem",
+      "old_mexico_score": 123,
+      "corrected_mexico_score": 133,
+      "old_mexico_total": 2838,
+      "corrected_mexico_total": 2848
+    },
+    {
+      "manager": "Andries",
+      "team": "vansF1",
+      "old_mexico_score": 108,
+      "corrected_mexico_score": 115,
+      "old_mexico_total": 2784,
+      "corrected_mexico_total": 2791
+    },
+    {
+      "manager": "daniellecheng",
+      "team": "lance strolls brake pedal",
+      "old_mexico_score": 96,
+      "corrected_mexico_score": 79,
+      "old_mexico_total": 2768,
+      "corrected_mexico_total": 2751
+    },
+    {
+      "manager": "Patrick Maraun",
+      "team": "Double Parked",
+      "old_mexico_score": 90,
+      "corrected_mexico_score": 99,
+      "old_mexico_total": 2723,
+      "corrected_mexico_total": 2732
+    },
+    {
+      "manager": "Jean Alesi",
+      "team": "Machined Wheel Nut",
+      "old_mexico_score": 108,
+      "corrected_mexico_score": 121,
+      "old_mexico_total": 2694,
+      "corrected_mexico_total": 2707
+    },
+    {
+      "manager": "dmack",
+      "team": "Strolling to Last Place",
+      "old_mexico_score": 103,
+      "corrected_mexico_score": 107,
+      "old_mexico_total": 2719,
+      "corrected_mexico_total": 2723
+    },
+    {
+      "manager": "Christiaan",
+      "team": "Petch Racing",
+      "old_mexico_score": 123,
+      "corrected_mexico_score": 137,
+      "old_mexico_total": 2639,
+      "corrected_mexico_total": 2653
+    },
+    {
+      "manager": "joydelacruz",
+      "team": "joyride",
+      "old_mexico_score": 109,
+      "corrected_mexico_score": 113,
+      "old_mexico_total": 2638,
+      "corrected_mexico_total": 2642
+    },
+    {
+      "manager": "Zeke",
+      "team": "Give me the drink",
+      "old_mexico_score": 93,
+      "corrected_mexico_score": 100,
+      "old_mexico_total": 2616,
+      "corrected_mexico_total": 2623
+    },
+    {
+      "manager": "CharlotteWareham",
+      "team": "Just an Inchident",
+      "old_mexico_score": 92,
+      "corrected_mexico_score": 75,
+      "old_mexico_total": 2659,
+      "corrected_mexico_total": 2642
+    },
+    {
+      "manager": "Pri Kumar",
+      "team": "Ibis2026",
+      "old_mexico_score": 116,
+      "corrected_mexico_score": 112,
+      "old_mexico_total": 2504,
+      "corrected_mexico_total": 2500
+    },
+    {
+      "manager": "Ruan01",
+      "team": "bubblegun",
+      "old_mexico_score": 70,
+      "corrected_mexico_score": 88,
+      "old_mexico_total": 2506,
+      "corrected_mexico_total": 2524
+    },
+    {
+      "manager": "NellieWhiteside",
+      "team": "Watts Up Racing",
+      "old_mexico_score": 102,
+      "corrected_mexico_score": 75,
+      "old_mexico_total": 2490,
+      "corrected_mexico_total": 2463
+    },
+    {
+      "manager": "sl",
+      "team": "I thought this was Mario Kart",
+      "old_mexico_score": 92,
+      "corrected_mexico_score": 75,
+      "old_mexico_total": 2450,
+      "corrected_mexico_total": 2433
+    },
+    {
+      "manager": "ariel_h",
+      "team": "Nord Racing",
+      "old_mexico_score": 103,
+      "corrected_mexico_score": 122,
+      "old_mexico_total": 2365,
+      "corrected_mexico_total": 2384
+    },
+    {
+      "manager": "garettann",
+      "team": "Doohanok",
+      "old_mexico_score": 96,
+      "corrected_mexico_score": 80,
+      "old_mexico_total": 2399,
+      "corrected_mexico_total": 2383
+    },
+    {
+      "manager": "Alan Thomas",
+      "team": "Buzzin with Eddie",
+      "old_mexico_score": 140,
+      "corrected_mexico_score": 137,
+      "old_mexico_total": 2396,
+      "corrected_mexico_total": 2393
+    },
+    {
+      "manager": "Kevin de Silva",
+      "team": "No Mikey No",
+      "old_mexico_score": 73,
+      "corrected_mexico_score": 84,
+      "old_mexico_total": 2325,
+      "corrected_mexico_total": 2336
+    },
+    {
+      "manager": "Corey McDonald",
+      "team": "AureConstructors Championship",
+      "old_mexico_score": 77,
+      "corrected_mexico_score": 86,
+      "old_mexico_total": 2308,
+      "corrected_mexico_total": 2317
+    },
+    {
+      "manager": "redflag",
+      "team": "QuantumSpeed",
+      "old_mexico_score": 76,
+      "corrected_mexico_score": 89,
+      "old_mexico_total": 2277,
+      "corrected_mexico_total": 2290
+    },
+    {
+      "manager": "Devmal",
+      "team": "Feeling Bullish",
+      "old_mexico_score": 115,
+      "corrected_mexico_score": 128,
+      "old_mexico_total": 2150,
+      "corrected_mexico_total": 2163
+    },
+    {
+      "manager": "BOS",
+      "team": "Piastroying The Grid",
+      "old_mexico_score": 75,
+      "corrected_mexico_score": 58,
+      "old_mexico_total": 2187,
+      "corrected_mexico_total": 2170
+    },
+    {
+      "manager": "Emily Tantau",
+      "team": "Car Go Vroom Vroom Super Fast",
+      "old_mexico_score": 80,
+      "corrected_mexico_score": 72,
+      "old_mexico_total": 1973,
+      "corrected_mexico_total": 1965
+    },
+    {
+      "manager": "deciMal_oNion",
+      "team": "Octopus Ross",
+      "old_mexico_score": 74,
+      "corrected_mexico_score": 50,
+      "old_mexico_total": 1882,
+      "corrected_mexico_total": 1858
+    },
+    {
+      "manager": "Scorched Almond",
+      "team": "ALMOCO",
+      "old_mexico_score": 108,
+      "corrected_mexico_score": 76,
+      "old_mexico_total": 1833,
+      "corrected_mexico_total": 1801
+    },
+    {
+      "manager": "Chelsea Innes",
+      "team": "Piastronimical Speedy",
+      "old_mexico_score": 81,
+      "corrected_mexico_score": 82,
+      "old_mexico_total": 1802,
+      "corrected_mexico_total": 1803
+    }
+  ],
+  "mexico_correction_count": 45,
+  "update": {
+    "status": "updated",
+    "round": 20,
+    "race": "Brazil",
+    "competitors": 46,
+    "renamed_teams": []
+  }
+}
