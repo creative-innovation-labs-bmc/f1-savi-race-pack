@@ -26,7 +26,7 @@ jobs:
         run: |
           python -m pip install playwright==1.54.0
           python -m playwright install --with-deps chromium
-      - name: Capture current FantasyGP account state read-only
+      - name: Capture complete current FantasyGP league read-only
         shell: bash
         run: |
           mkdir -p build/moneyball-probe
@@ -36,60 +36,93 @@ jobs:
           from playwright.async_api import async_playwright
           sys.path.insert(0,'scripts')
           from fantasygp_auth_runner import authenticated_login
+          from fantasygp_update_runner import capture_site_page, jquery_ajax
+          from f1_savi.fantasygp import combine_league_pages, parse_integer
 
           OUT=Path('build/moneyball-probe')
           LEAGUE='https://fantasygp.com/league/?lid=10527'
+          LEAGUE_ID='10527'
+          EXPECTED=46
+          EXCLUDED={'leaguecode','presidentlist','profilelinks','teamuids','rowtag'}
 
-          async def snap(page,name,url):
-              resp=await page.goto(url,wait_until='domcontentloaded',timeout=60000)
-              await page.wait_for_timeout(2500)
-              body=await page.locator('body').inner_text()
-              (OUT/f'{name}.txt').write_text(body,encoding='utf-8')
-              (OUT/f'{name}.html').write_text(await page.content(),encoding='utf-8')
-              await page.screenshot(path=str(OUT/f'{name}.png'),full_page=True)
-              return {'url':page.url,'status':resp.status if resp else None,'body':body[:50000]}
+          def sanitise(payload):
+              return {k:v for k,v in payload.items() if k not in EXCLUDED}
 
-          async def open_modal(page,label,kind):
-              await page.goto('https://fantasygp.com/team/',wait_until='domcontentloaded',timeout=60000)
-              await page.wait_for_timeout(1500)
-              loc=page.get_by_text(label,exact=True)
-              clicked=False
-              for i in range(await loc.count()):
-                  try:
-                      el=loc.nth(i)
-                      if await el.is_visible():
-                          h=await el.element_handle()
-                          clicked=await page.evaluate("""e=>{let n=e;for(let j=0;j<8&&n;j++,n=n.parentElement){if(n.onclick||n.tagName==='BUTTON'||n.tagName==='A'||n.getAttribute('role')==='button'||[...n.attributes].some(a=>a.name.startsWith('data-'))){n.click();return true}}return false}""",h)
-                          if clicked:
-                              await page.wait_for_timeout(1200)
-                              break
-                  except Exception:
-                      pass
-              body=await page.locator('body').inner_text()
-              (OUT/f'{kind}-modal.txt').write_text(body,encoding='utf-8')
-              (OUT/f'{kind}-modal.html').write_text(await page.content(),encoding='utf-8')
-              await page.screenshot(path=str(OUT/f'{kind}-modal.png'),full_page=True)
-              return {'label':label,'kind':kind,'clicked':clicked,'body':body[:50000]}
+          async def capture_view(page,label,race):
+              pages=[]
+              offset=0
+              seen=set()
+              page_number=1
+              while True:
+                  if offset in seen:
+                      raise RuntimeError(f'Pagination repeated offset {offset}')
+                  seen.add(offset)
+                  payload=await capture_site_page(page,league_id=LEAGUE_ID,race=race,offset=offset)
+                  pages.append(payload)
+                  await page.wait_for_timeout(800)
+                  await page.screenshot(path=str(OUT/f'{label}-page-{page_number}.png'),full_page=True)
+                  (OUT/f'{label}-page-{page_number}.html').write_text(await page.content(),encoding='utf-8')
+                  (OUT/f'{label}-page-{page_number}.json').write_text(
+                      json.dumps(sanitise(payload),indent=2,ensure_ascii=False),encoding='utf-8')
+                  howmany=parse_integer(payload.get('howmany',0),field='howmany')
+                  total=parse_integer(payload.get('total',0),field='total')
+                  collected=sum(parse_integer(item.get('howmany',0),field='howmany') for item in pages)
+                  if collected>=total:
+                      break
+                  if howmany<=0:
+                      raise RuntimeError(f'Pagination stopped at {collected} of {total}')
+                  next_offset=parse_integer(payload.get('newoffset',offset+howmany),field='newoffset')
+                  if next_offset<=offset:
+                      next_offset=offset+howmany
+                  await page.wait_for_function(
+                      """({leagueId,race,offset}) => [...document.querySelectorAll('.pageitnext')].some(
+                          el => String(el.dataset.league)===String(leagueId) &&
+                                String(el.dataset.race)===String(race) &&
+                                String(el.dataset.offset)===String(offset))""",
+                      arg={'leagueId':LEAGUE_ID,'race':race,'offset':next_offset},timeout=30000)
+                  offset=next_offset
+                  page_number+=1
+              rows=combine_league_pages(pages,expected_competitors=EXPECTED)
+              return {
+                  'race':race,
+                  'page_count':len(pages),
+                  'row_count':len(rows),
+                  'rows':[row.to_dict() for row in rows],
+                  'pages':[sanitise(p) for p in pages],
+              }
 
           async def main():
-            async with async_playwright() as p:
-                browser=await p.chromium.launch(headless=True)
-                ctx=await browser.new_context(viewport={'width':1600,'height':1300})
-                page=await ctx.new_page()
-                auth=await authenticated_login(page,league_url=LEAGUE,username=os.environ['FANTASYGP_USERNAME'],password=os.environ['FANTASYGP_PASSWORD'])
-                result={'auth':auth}
-                result['league']=await snap(page,'league',LEAGUE)
-                result['team']=await snap(page,'team','https://fantasygp.com/team/')
-                result['predictions']=await snap(page,'predictions','https://fantasygp.com/predictions/')
-                result['stats']=await snap(page,'stats','https://fantasygp.com/stats/')
-                result['driver_modal']=await open_modal(page,'Antonelli','driver')
-                result['car_modal']=await open_modal(page,'Mercedes','car')
-                (OUT/'summary.json').write_text(json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
-                await browser.close()
+              async with async_playwright() as p:
+                  browser=await p.chromium.launch(headless=True)
+                  ctx=await browser.new_context(
+                      locale='en-AU',timezone_id='Australia/Melbourne',
+                      viewport={'width':1600,'height':1400})
+                  page=await ctx.new_page()
+                  auth=await authenticated_login(
+                      page,league_url=LEAGUE,
+                      username=os.environ['FANTASYGP_USERNAME'],
+                      password=os.environ['FANTASYGP_PASSWORD'])
+                  selector=await jquery_ajax(page,'fetchRaceSelect',{},method='GET')
+                  latest=parse_integer(selector.get('activerace'),field='activerace')-1
+                  names=selector.get('gp') or []
+                  race_name=str(names[latest]).strip()
+                  overall=await capture_view(page,'overall',0)
+                  race=await capture_view(page,'race',latest)
+                  result={
+                      'auth':auth,
+                      'latest_completed_round':latest,
+                      'latest_completed_race':race_name,
+                      'race_selector':selector,
+                      'overall':overall,
+                      'race_results':race,
+                  }
+                  (OUT/'fantasygp-snapshot.json').write_text(
+                      json.dumps(result,indent=2,ensure_ascii=False),encoding='utf-8')
+                  await browser.close()
           asyncio.run(main())
           PY
       - uses: actions/upload-artifact@v6
         with:
           name: fantasygp-moneyball-probe
           path: build/moneyball-probe/
-          retention-days: 1
+          retention-days: 2
