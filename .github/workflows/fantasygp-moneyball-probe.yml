@@ -107,6 +107,7 @@ jobs:
                   names=selector.get('gp') or []
                   race_name=str(names[latest]).strip()
                   overall=await capture_view(page,'overall',0)
+                  prior_race=await capture_view(page,'prior-race',latest-1)
                   race=await capture_view(page,'race',latest)
                   result={
                       'auth':auth,
@@ -114,6 +115,7 @@ jobs:
                       'latest_completed_race':race_name,
                       'race_selector':selector,
                       'overall':overall,
+                      'prior_race_results':prior_race,
                       'race_results':race,
                   }
                   (OUT/'fantasygp-snapshot.json').write_text(
