@@ -90,28 +90,22 @@ async def snapshot(page: Page, directory: Path, label: str) -> None:
 
 async def login(page: Page, email: str, password: str, diagnostics: Path) -> None:
     await page.goto(LOGIN_URL, wait_until="domcontentloaded", timeout=90_000)
-    email_box = page.locator(
-        "input[type='email'], input[name='email'], input[autocomplete='username']"
-    ).first
-    password_box = page.locator(
-        "input[type='password'], input[name='password'], input[autocomplete='current-password']"
-    ).first
+    email_box = page.locator("input[type='email'], input[name='email']").first
+    password_box = page.locator("input[type='password'], input[name='password']").first
     await email_box.wait_for(state="visible", timeout=30_000)
     await password_box.wait_for(state="visible", timeout=30_000)
     await email_box.fill(email)
     await password_box.fill(password)
 
-    submit = page.get_by_role("button", name=re.compile(r"^(Log in|Sign in)$", re.I))
+    submit = page.get_by_role("button", name="Log in", exact=True)
     if not await submit.count():
         submit = page.locator("button[type='submit']").first
     await submit.click()
 
-    for _ in range(60):
-        await page.wait_for_timeout(500)
-        if "/login" not in page.url and not await page.locator("input[type='password']:visible").count():
-            return
-    await snapshot(page, diagnostics, "login-failed")
-    raise RuntimeError("Flourish login did not establish an authenticated session.")
+    await page.wait_for_url(re.compile(r"/projects(?:$|[?#])"), timeout=45_000)
+    await page.get_by_text(PROJECTS[23536150], exact=True).wait_for(state="visible", timeout=45_000)
+    await page.get_by_text(PROJECTS[23537908], exact=True).wait_for(state="visible", timeout=45_000)
+    await page.wait_for_timeout(5_000)
 
 
 async def exact_control(page: Page, names: list[str]):
