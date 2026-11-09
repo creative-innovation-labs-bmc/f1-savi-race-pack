@@ -126,7 +126,14 @@ Pull requests run both deterministic QC and a read-only authenticated FantasyGP 
 - Races: visualisation `23536150`
 - Leaderboard: visualisation `23537908`
 
-The generated CSVs preserve their current column structure. Publishing remains a separate step until a supported Flourish live-data or publishing route is configured.
+Flourish is now synced automatically from the canonical season masters:
+
+- `data/season2/individual.csv` → Races
+- `data/season2/cumulative.csv` → Leaderboard
+
+The `Flourish data sync` GitHub Actions workflow runs whenever either canonical season CSV changes. It validates the 46-row source files, uploads both complete datasets into Flourish, verifies the latest race column in the editor, then republishes both visualisations. Diagnostics are retained as a workflow artifact if the sync fails.
+
+The older `Flourish republish` workflow remains available for a publish-only retry, but it does not replace the data-sync workflow.
 
 ## Roadmap
 
