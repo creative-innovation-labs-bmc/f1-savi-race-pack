@@ -164,11 +164,20 @@ async def upload_csv(
 
     # Current Flourish exposes a blue split-button labelled exactly "Upload data".
     # Use that control rather than assigning an arbitrary hidden file input.
-    upload = page.get_by_role("button", name=re.compile(r"^Upload data$", re.I))
-    if not await upload.count():
-        upload = page.get_by_text(re.compile(r"^Upload data$", re.I), exact=True)
+    upload = None
+    # Flourish currently renders "Upload data" as a styled non-button element.
+    # Text-engine lookup is therefore more reliable than ARIA/button lookup.
+    candidates = page.locator("text=Upload data")
+    for i in range(await candidates.count()):
+        candidate = candidates.nth(i)
+        try:
+            if await candidate.is_visible():
+                upload = candidate
+                break
+        except Exception:
+            continue
 
-    if not await upload.count() or not await upload.first.is_visible():
+    if upload is None:
         await snapshot(page, diagnostics, f"{visualisation_id}-upload-data-missing")
         raise RuntimeError(
             f"Could not find the Flourish Upload data control for visualisation {visualisation_id}."
@@ -177,7 +186,7 @@ async def upload_csv(
     chooser_used = False
     try:
         async with page.expect_file_chooser(timeout=8000) as chooser_info:
-            await upload.first.click()
+            await upload.click()
         chooser = await chooser_info.value
         await chooser.set_files(str(csv_path.resolve()))
         chooser_used = True
