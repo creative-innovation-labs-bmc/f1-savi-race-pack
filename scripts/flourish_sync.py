@@ -162,52 +162,65 @@ async def upload_csv(
     await open_data_tab(page, visualisation_id, diagnostics)
     await snapshot(page, diagnostics, f"{visualisation_id}-data-before-import")
 
-    # Prefer an existing file input because it is more stable than button wording.
-    file_inputs = page.locator("input[type='file']")
-    if await file_inputs.count():
-        await file_inputs.first.set_input_files(str(csv_path.resolve()))
-    else:
-        import_control = await exact_control(
-            page,
-            [
-                "Import data",
-                "Import",
-                "Upload data",
-                "Upload CSV",
-                "Replace data",
-            ],
+    # Current Flourish exposes a blue split-button labelled exactly "Upload data".
+    # Use that control rather than assigning an arbitrary hidden file input.
+    upload = page.get_by_role("button", name=re.compile(r"^Upload data$", re.I))
+    if not await upload.count():
+        upload = page.get_by_text(re.compile(r"^Upload data$", re.I), exact=True)
+
+    if not await upload.count() or not await upload.first.is_visible():
+        await snapshot(page, diagnostics, f"{visualisation_id}-upload-data-missing")
+        raise RuntimeError(
+            f"Could not find the Flourish Upload data control for visualisation {visualisation_id}."
         )
-        if import_control is None:
-            # Some versions expose Import data as a non-button clickable element.
-            fallback = page.get_by_text(re.compile(r"^Import data$", re.I), exact=True)
-            if await fallback.count() and await fallback.first.is_visible():
-                import_control = fallback.first
 
-        if import_control is None:
-            await snapshot(page, diagnostics, f"{visualisation_id}-import-control-missing")
-            raise RuntimeError(
-                f"Could not find a safe data-import control for Flourish visualisation {visualisation_id}."
-            )
-
-        try:
-            async with page.expect_file_chooser(timeout=5000) as chooser_info:
-                await import_control.click()
-            chooser = await chooser_info.value
-            await chooser.set_files(str(csv_path.resolve()))
-        except Exception:
-            # The first click may open a modal which then exposes a file input.
-            await page.wait_for_timeout(1000)
-            file_inputs = page.locator("input[type='file']")
-            if not await file_inputs.count():
-                await snapshot(page, diagnostics, f"{visualisation_id}-file-input-missing")
-                raise RuntimeError(
-                    f"Flourish import UI for {visualisation_id} did not expose a file chooser."
-                )
+    chooser_used = False
+    try:
+        async with page.expect_file_chooser(timeout=8000) as chooser_info:
+            await upload.first.click()
+        chooser = await chooser_info.value
+        await chooser.set_files(str(csv_path.resolve()))
+        chooser_used = True
+    except Exception:
+        # Some UI variants open an upload menu/modal before exposing the file input.
+        await page.wait_for_timeout(1200)
+        file_inputs = page.locator("input[type='file']")
+        if await file_inputs.count():
             await file_inputs.first.set_input_files(str(csv_path.resolve()))
+            chooser_used = True
+        else:
+            # Try the split-button menu for an explicit file-upload entry.
+            menu_button = page.locator(
+                "button:visible"
+            ).filter(has=page.locator("svg")).filter(has_text="")
+            # Prefer menu text if the main Upload data button opened a menu.
+            for label in ("Upload CSV", "Upload file", "Choose file", "Import data"):
+                candidate = page.get_by_text(re.compile(rf"^{re.escape(label)}$", re.I), exact=True)
+                if await candidate.count() and await candidate.first.is_visible():
+                    try:
+                        async with page.expect_file_chooser(timeout=5000) as chooser_info:
+                            await candidate.first.click()
+                        chooser = await chooser_info.value
+                        await chooser.set_files(str(csv_path.resolve()))
+                        chooser_used = True
+                        break
+                    except Exception:
+                        await page.wait_for_timeout(500)
+                        file_inputs = page.locator("input[type='file']")
+                        if await file_inputs.count():
+                            await file_inputs.first.set_input_files(str(csv_path.resolve()))
+                            chooser_used = True
+                            break
 
-    await page.wait_for_timeout(2500)
+    if not chooser_used:
+        await snapshot(page, diagnostics, f"{visualisation_id}-file-chooser-missing")
+        raise RuntimeError(
+            f"Flourish upload UI for {visualisation_id} did not accept a CSV file."
+        )
 
-    # Confirm only explicit replace/import actions. Avoid broad generic clicks.
+    await page.wait_for_timeout(3000)
+
+    # Confirm only explicit import/replace actions when Flourish presents them.
     for names in (
         ["Import", "Import data", "Replace", "Replace data"],
         ["Continue", "Next"],
@@ -221,15 +234,26 @@ async def upload_csv(
             except Exception:
                 pass
 
-    # Wait for the new latest column heading to appear in the Data view.
-    expected = page.get_by_text(latest_header, exact=True)
-    for _ in range(50):
-        try:
-            if await expected.count():
-                return
-        except Exception:
-            pass
-        await page.wait_for_timeout(500)
+    # Flourish virtualises wide data grids, so columns outside the viewport are not
+    # present in the DOM until horizontally scrolled into view. Scroll every
+    # horizontally-overflowing grid container to its far right before verifying.
+    for _ in range(6):
+        await page.evaluate(
+            """
+            () => {
+              for (const el of document.querySelectorAll('*')) {
+                if (el.scrollWidth > el.clientWidth + 80) {
+                  el.scrollLeft = el.scrollWidth;
+                }
+              }
+            }
+            """
+        )
+        await page.wait_for_timeout(700)
+        body = await page.locator("body").inner_text()
+        if latest_header in body:
+            await snapshot(page, diagnostics, f"{visualisation_id}-data-after-import")
+            return
 
     await snapshot(page, diagnostics, f"{visualisation_id}-latest-header-not-visible")
     raise RuntimeError(
