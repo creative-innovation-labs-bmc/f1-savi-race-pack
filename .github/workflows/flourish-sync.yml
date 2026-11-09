@@ -22,8 +22,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      FLOURISH_EMAIL: \${{ secrets.FLOURISH_EMAIL }}
-      FLOURISH_PASSWORD: \${{ secrets.FLOURISH_PASSWORD }}
+      FLOURISH_EMAIL: ${{ secrets.FLOURISH_EMAIL }}
+      FLOURISH_PASSWORD: ${{ secrets.FLOURISH_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v6
