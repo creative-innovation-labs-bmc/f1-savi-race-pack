@@ -1,0 +1,27 @@
+{
+  "round": 21,
+  "race": "Las Vegas",
+  "slug": "las-vegas",
+  "files": {
+    "F1_Season2_Cumulative_R21_Las_Vegas_GRAPH_FIXED.csv": "3d85f78a0091bf6c1add399706c163d9e9eeeb44f9705e292f6f032814c7fa06",
+    "F1_Season2_Individual_R21_Las_Vegas.csv": "f99679ef05ff5d394618ed459ed637a79fdc4a322c11054bb99fed8897b5a09c",
+    "QC_REPORT.md": "5f298d2da413f71694029b19f637cd324d00c80643d13d39ed312e1e3d7f080a",
+    "README.md": "b4eeffe9ce1a184d8f3f1c4a6edc9e17055feea227c9b840b69f9ac38336a7a4",
+    "SAVI_League_R21_Las_Vegas_Top10.png": "caa84ecb508d19535a5688e835cc6aec3c8ab3233f366c59d9720e1cfb676659",
+    "Teams_Update.html": "e509b81393b6864ccd429e988bf7e38589e30810503d81ea83764ed1f32e984b",
+    "Teams_Update.txt": "ccecacd5d12a0e201ed12c8f1ed37734f200e7bb6e3133b5f2466dd93fcfc503",
+    "Voiceover_R21_Las_Vegas.md": "da6e89e480400c3223f5225459b826ba15bdda6355d8dcbb83e5b7a42f27f13e",
+    "Work_Channel_Update_R21_Las_Vegas.md": "a27ac2f122baad60e72c2b5fa54883d0c92c291420676b2bd5c5a172b98108c9",
+    "fantasygp-captures/fantasygp-row-capture.json": "157850da96fc58b81a4c18c52e307e9e9ca0a50ef96ca024de75cbabc39951cf",
+    "fantasygp-captures/overall-page-1.png": "f3910bd654fc5f3cc22db88a4092a79a1b8c7bcdc39d77a5f4460e28c5696dc9",
+    "fantasygp-captures/overall-page-2.png": "87f0e6c6971fa42add862e025ad74b344e4d356c0c2215bfb7a5e9b2ac320c80",
+    "fantasygp-captures/race-page-1.png": "f1ae564c0923143c35dcec9155c43352e1a7511d820f15227b4798169580a7ae",
+    "fantasygp-captures/race-page-2.png": "81cfd4ca8aac40db6c22e48e2855aa57e538566e011679d5520360aee1debef6",
+    "fantasygp-movements.json": "57706fde8bfbed6e5396465559d80eb82c57b095c36adcbdef05de3f32c3fc34",
+    "latest_adjustments.csv": "731a1531d21278de0f4013e57ae852349c803cd95dcbb831ded3b22e191ed21d",
+    "overall_top_10.csv": "921203d43eed3f857771c02749a6cc7637b18ae66a6ab45238d69e1f76ba6f81",
+    "race_data.json": "04776ea10558557a57638e7da9558e5cfa16c548fc39f556e98743c0957b9fcb",
+    "race_top_10.csv": "a9eb3efbcff33c0a7cee24ef6c39d4957a465e219f56334656617d41ff33fb0f",
+    "update-summary.json": "c27e1af607ccfc4dcbc63d528444038078dada88807d8e028ab3c7558757c00e"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "status": "pass",
+  "source": "FantasyGP authenticated two-page capture",
+  "latest_completed_round": 21,
+  "latest_completed_race": "Las Vegas",
+  "overall_pages": 2,
+  "race_pages": 2,
+  "competitors": 46,
+  "update": {
+    "status": "no_change",
+    "round": 21,
+    "race": "Las Vegas",
+    "competitors": 46,
+    "renamed_teams": []
+  }
+}
